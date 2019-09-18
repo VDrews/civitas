@@ -9,23 +9,12 @@ module Civitas
     PASAR_TURNO=:pasar_turno
     
   end
-  
-  class Diario
-    include Singleton
-    
-    def initialize
-      @eventos=[]
-    end
-    
-    def ocurre_evento(e)
-      @eventos << e
-    end
-    
-    def eventos_pendientes
-      return (@eventos.length > 0)
-    end
-    
-    def
+    module Estados_juego
+      INICIO_TURNO = :inicio_turno  
+      DESPUES_CARCEL =:despues_carcel
+  		DESPUES_AVANZAR = :despues_avanzar
+  		DESPUES_COMPRAR =:despues_comprar
+  		DESPUES_GESTIONAR =:despues_gestionar
   end
 end
 
