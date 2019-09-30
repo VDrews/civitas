@@ -9,7 +9,7 @@ public class Tablero {
     private int porSalida;
     private boolean tieneJuez;
     
-    public Tablero(int indice){
+    Tablero(int indice){
         if (indice>=1)
         numCasillaCarcel=indice;
         else numCasillaCarcel=1;
@@ -37,22 +37,22 @@ public class Tablero {
 
     int getPorSalida(){
         if (porSalida>0){
-            return porSalida;
-            porSalida--;
+            porSalida++;
+            return (porSalida-1);
         }
         else return porSalida;
     }
 
     void añadeCasilla (Casilla casilla){
-        if (casillas.size()==numCasillaCarcel){
+        if (casillas.size()==numCasillaCarcel)
             casillas.add(new Casilla("Cárcel"));
-        }
         casillas.add(casilla);
-        //Por terminar
+        if (casillas.size()==numCasillaCarcel)
+            casillas.add(new Casilla("Cárcel"));
     }
 
     void añadeJuez(){
-        if (!tienejuez){
+        if (!tieneJuez){
             casillas.add(new Casilla("Juez"));
             tieneJuez=true;
         }

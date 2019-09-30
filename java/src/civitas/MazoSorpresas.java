@@ -1,12 +1,13 @@
 package civitas;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class MazoSorpresas{
     private ArrayList<Sorpresa> sorpresas;
     private boolean barajada;
     private int usadas;
-    private int debug;
+    private boolean debug;
     private ArrayList<Sorpresa> cartasEspeciales;
     private Sorpresa ultimaSorpresa;
 
@@ -18,14 +19,15 @@ public class MazoSorpresas{
         cartasEspeciales=new ArrayList<Sorpresa>();
     }
 
-    public MazoSorpresas(){
+    MazoSorpresas(){
         init();
         debug=false;
     }
 
-    public MazoSorpresas(boolean d){
+    MazoSorpresas(boolean d){
         init();
         debug=d;
+        if (d) Diario.getInstance().ocurreEvento("MazoSorpresas--Modo debug: activado");
     }
 
     void alMazo(Sorpresa s){
@@ -38,9 +40,33 @@ public class MazoSorpresas{
             usadas=0;
             barajada=true;
         }
+        usadas++;
+        ultimaSorpresa=sorpresas.get(0);
+        sorpresas.remove(0);
+
+        return ultimaSorpresa;
     }
 
     void inhabilitarCartaEspecial(Sorpresa sorpresa){
-        
+        boolean esta=false;
+        for (int i=0; i<sorpresas.size() && !esta; i++){
+            if (sorpresa==sorpresas.get(i)){
+                cartasEspeciales.add(sorpresas.remove(i));
+                Diario.getInstance().ocurreEvento("MazoSorpresas--Carta especial inhabilitada");
+                esta=true;
+            }
+        }
     }
+
+    void habilitarCartaEspecial (Sorpresa sorpresa){
+        boolean esta=false;
+        for (int i=0; i<cartasEspeciales.size() && !esta; i++){
+            if (sorpresa==cartasEspeciales.get(i)){
+                sorpresas.add(cartasEspeciales.remove(i));
+                Diario.getInstance().ocurreEvento("MazoSorpresas--Carta especial habilitada");
+                esta=true;
+            }
+        }
+    }
+    
 }

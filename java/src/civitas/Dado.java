@@ -18,14 +18,14 @@ public class Dado{
 
     static Dado getInstance() {return instance;}
 
-    private static int getRandomNumberInRange(int min, int max) {
+    private int getRandomNumberInRange(int min, int max) {
 
 		if (min >= max) {
 			throw new IllegalArgumentException("max must be greater than min");
 		}
 
-		Random r = new Random();
-		return r.nextInt((max - min) + 1) + min;
+		random = new Random();
+		return random.nextInt((max - min) + 1) + min;
 	}
 
 
@@ -42,7 +42,7 @@ public class Dado{
     }
 
     boolean salgoDeLaCarcel(){
-        return (tirar()>=5);
+        return (tirar()>=SalidaCarcel);
     }
 
     int quienEmpieza (int n){
@@ -51,6 +51,10 @@ public class Dado{
 
     void setDebug(boolean d){
         debug=d;
+        String e="Dado--Modo debug: ";
+        if (d) e.concat("activado");
+        else e.concat("desactivado");
+        Diario.getInstance().ocurreEvento(e);
     }
 
     int getUltimoResultado() {
