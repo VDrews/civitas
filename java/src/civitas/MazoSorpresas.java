@@ -36,7 +36,7 @@ public class MazoSorpresas{
 
     Sorpresa siguiente(){
         if (!barajada || usadas==sorpresas.size()){
-            Collections.shuffle(sorpresas);
+            if (!debug) Collections.shuffle(sorpresas);
             usadas=0;
             barajada=true;
         }
