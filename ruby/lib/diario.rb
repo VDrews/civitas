@@ -1,15 +1,24 @@
 require 'singleton'
-
-class Diario
+module Civitas
+  class Diario
     include Singleton
-    @@eventos = []
 
-    def ocurreEvento(evento)
-        @@eventos.push(evento)
+    def initialize
+      @eventos = []
     end
 
+    def ocurre_evento(e)
+      @eventos << e
+    end
 
+    def eventos_pendientes
+      return (@eventos.length > 0)
+    end
 
+    def leer_evento
+      e = @eventos.shift
+      return e
+    end
+
+  end
 end
-
-#Diario.instance para obtener la instancia
