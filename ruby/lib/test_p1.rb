@@ -39,7 +39,6 @@ class TestP1
 
         puts (dado.salgoDeLaCarcel) ? 'Salgo de la carcel' : 'No salgo de la carcel'
         
-        puts Estados_Juego.
         
         
     end
