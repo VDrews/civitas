@@ -44,7 +44,7 @@ module Civitas
                 nueva_pos=Tablero::nuevaPosicion(todos[actual].casillaActual, tirada)
                 todos[actual].moverACasilla(nueva_pos)
                 Casilla::recibeJugador(actual, todos)
-
+            end
 
         end
 
@@ -102,7 +102,7 @@ module Civitas
         end
 
         def informe(actual, todos)
-            Diario.instance.ocurre_evento("Se aplica sorpresa "+@tipo" a "+todos[actual])
+            Diario.instance.ocurre_evento("Se aplica sorpresa " + @tipo + " a "+ todos[actual])
         end
 
         public

@@ -76,10 +76,10 @@ public class Casilla {
         
         }
     }
-    private void recibeJugador_calle(int actual, ArrayList<Jugador> todos)
-    private void recibeJugador_sorpresa(int actual, ArrayList<Jugador> todos)
+    // private void recibeJugador_calle(int actual, ArrayList<Jugador> todos)
+    // private void recibeJugador_sorpresa(int actual, ArrayList<Jugador> todos)
     private void recibeJugador_impuesto(int actual, ArrayList<Jugador> todos) {
-            todos[actual].pagaImpuesto(importe);
+        todos[actual].pagaImpuesto(importe);
     }
 
     private void recibeJugador_juez(int actual, ArrayList<Jugador> todos) {

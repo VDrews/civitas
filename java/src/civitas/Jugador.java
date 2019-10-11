@@ -61,6 +61,10 @@ public class Jugador implements Comparable<Jugador> {
         salvoconducto.usada();
     }
 
+    boolean enBancarrota() {
+        return saldo <= 0;
+    }
+
     boolean tieneSalvoconducto() {
         return salvoconducto != null;
     }

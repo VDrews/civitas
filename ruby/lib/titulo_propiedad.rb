@@ -85,7 +85,7 @@ module Civitas
 
         def construirCasa(jugador)
             if(esEsteElPropietario(jugador))
-                @numCasas++
+                @numCasas += 1
                 return true
             else
                 return false
@@ -94,7 +94,7 @@ module Civitas
 
         def construirHotel(jugador)
             if(esEsteElPropietario(jugador))
-                @numHoteles++
+                @numHoteles += 1
                 return true
             else
                 return false
@@ -102,8 +102,8 @@ module Civitas
         end
 
         def derruirCasas(n, jugador)
-            if(esEsteElPropietario(jugador)&&@numCasas>=n)
-                @numCasas-=n
+            if(esEsteElPropietario(jugador) && @numCasas >= n)
+                @numCasas -= n
                 return true
             else
                 return false
@@ -147,5 +147,6 @@ module Civitas
 
         def getPrecioVenta
             return @precioCompra+(@precioEdificar*cantidadCasasHoteles)*@factorRevalorizacion
+        end
     end
 end

@@ -1,6 +1,8 @@
 package civitas;
 
+import java.util.ArrayList;
 import java.util.Collection;
+
 
 public class CivitasJuego {
     private int indiceJugadorActual;
@@ -17,8 +19,9 @@ public class CivitasJuego {
             jugadores.add(new Jugador(nombres[i]));
         }
 
+        gestorEstados = new GestorEstados();
         gestorEstados.estadoInicial();
-        indiceJugadorActual = Dado.getInstance().quienEmpieza(n);
+        indiceJugadorActual = Dado.getInstance().quienEmpieza(nombres.size());
         mazo = new MazoSorpresas();
         tablero = new Tablero(10);
         inicializaTablero(mazo);
@@ -27,25 +30,25 @@ public class CivitasJuego {
     }
 
     void actualizarInfo() {
-        system.out.println("Jugador: " + jugadores[actual].toString());
+        System.out.println("Jugador: " + jugadores[actual].toString());
 
         if (algunoEnBancarrota()) {
             ranking();
         }
     }
 
-    private void inicializaTablero(MazoSorpesas mazo) {
+    private void inicializaTablero(MazoSorpresas mazo) {
         tablero = new Tablero(10);
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 1", 120, 1.1, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 2", 120, 1.1, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 3", 120, 1.1, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 4", 120, 1.1, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 5", 120, 1.1, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 6", 120, 1.1, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 7", 120, 1.1, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(200.5, "Peaje1")); //Impuesto
-        tablero.añadeCasilla(new Casilla(200.5, "Peaje2")); //Impuesto
-        tablero.añadeCasilla(new Casilla(200.5, "Peaje3")); //Impuesto
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 1", 120, 1.1f, 20000, 40000, 20000)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 2", 120, 1.1f, 20000, 40000, 20000)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 3", 120, 1.1f, 20000, 40000, 20000)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 4", 120, 1.1f, 20000, 40000, 20000)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 5", 120, 1.1f, 20000, 40000, 20000)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 6", 120, 1.1f, 20000, 40000, 20000)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 7", 120, 1.1f, 20000, 40000, 20000)));
+        tablero.añadeCasilla(new Casilla(200.5f, "Peaje1")); //Impuesto
+        tablero.añadeCasilla(new Casilla(200.5f, "Peaje2")); //Impuesto
+        tablero.añadeCasilla(new Casilla(200.5f, "Peaje3")); //Impuesto
         tablero.añadeCasilla(new Casilla("Camping")); //Descanso
         tablero.añadeCasilla(new Casilla("Burger King")); //Descanso
         tablero.añadeCasilla(new Casilla(10, "Juez")); //Juez
@@ -80,10 +83,7 @@ public class CivitasJuego {
     }
 
     private void pasarTurno() {
-        indiceJugadorActual++;
-        if (indiceJugadorActual >= jugadores.size() - 1) {
-            indiceJugadorActual = 0;
-        }
+        indiceJugadorActual = (indiceJugadorActual + 1) % jugadores.size();
     }
 
     public Casilla getCasillaActual() {
@@ -107,6 +107,7 @@ public class CivitasJuego {
     public void infoJugadorTexto() {
 
     }
+    
     public boolean vender(int ip) {
         return jugador.vender(ip);
     }
