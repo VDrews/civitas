@@ -6,51 +6,51 @@ module Civitas
         @porSalida = 0
         @tieneJuez = false
         
-        casillas.push(Casilla.new('Salida'))
+        @casillas.push(Casilla.newDescanso('Salida'))
 
         end
         
         def correcto(numCasilla = nil)
             if (numCasilla == nil)
-                return casillas.length > numCasillaCarcel
-            elsif (casillas.length > numCasillaCarcel && numCasilla >= 0 && numCasilla < casillas.length)
+                return @casillas.length > @numCasillaCarcel
+            elsif (@casillas.length > @numCasillaCarcel && numCasilla >= 0 && numCasilla < @casillas.length)
                 return true
             end
         end
 
         def getCarcel()
-            return numCasillaCarcel
+            return @numCasillaCarcel
         end
 
         def getPorSalida()
-            ret = porSalida
-            if (porSalida > 0) 
-                porSalida -= 1
+            ret = @porSalida
+            if (@porSalida > 0) 
+                @porSalida -= 1
             end
             return ret
 
         end
 
         def añadeCasilla(casilla)
-            if (casillas.length == numCasillaCarcel) 
-                casillas.push(Casilla.new("Cárcel"))
+            if (@casillas.length == @numCasillaCarcel) 
+                @casillas.push(Casilla.new("Cárcel"))
             end
             Casilla.new(casilla)
-            if (casillas.length == numCasillaCarcel) 
-                casillas.push(Casilla.new("Cárcel"))
+            if (@casillas.length == @numCasillaCarcel) 
+                @casillas.push(Casilla.new("Cárcel"))
             end
         end
 
         def añadeJuez()
-            if (!tieneJuez)
-                casillas.push(Casilla.new("Juez"))
-                tieneJuez = true
+            if (!@tieneJuez)
+                @casillas.push(Casilla.new("Juez"))
+                @tieneJuez = true
             end
         end
 
         def getCasilla(numCasilla)
             if (correcto(numCasilla))
-                return casillas[numCasilla]
+                return @casillas[numCasilla]
             else
                 return null
             end
@@ -60,7 +60,7 @@ module Civitas
             if (correcto()) 
                 return -1
             end
-            return (actual + tirada) % casillas.length
+            return (actual + tirada) % @casillas.length
         end
 
         def calcularTirada(origen, destino)

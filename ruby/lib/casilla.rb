@@ -1,8 +1,8 @@
-require_relative tipo_casilla
-require_relative titulo_propiedad
-require_relative sorpresa
-require_relative mazo_sorpresas
-require_relative jugador
+require_relative('tipo_casilla')
+require_relative('sorpresa')
+require_relative('mazo_sorpresas')
+require_relative('jugador')
+require_relative('titulo_propiedad')
 
 module Civitas
     class Casilla
@@ -21,24 +21,24 @@ module Civitas
         attr_reader :nombre, :tituloPropiedad
 
         def self.newDescanso(nombre)
-            new(nil, nombre, DESCANSO, nil, nil, nil)
+            new(nil, nombre, TipoCasilla::DESCANSO, nil, nil, nil)
         end
 
         def self.newCalle(titulo)
-            new(titulo.precioCompra, titulo.nombre, CALLE, titulo, nil, nil)            
+            new(titulo.precioCompra, titulo.nombre, TipoCasilla::CALLE, titulo, nil, nil)            
         end
 
         def self.newImpuesto(cantidad, nombre)
-            new(cantidad, nombre, IMPUESTO, nil, nil. nil)
+            new(cantidad, nombre, TipoCasilla::IMPUESTO, nil, nil. nil)
         end
 
         def self.newJuez(numCasillaCarcel, nombre)
-            new(nil, nombre, JUEZ, nil, nil, nil)
+            new(nil, nombre, TipoCasilla::JUEZ, nil, nil, nil)
             @@carcel=numCasillaCarcel
         end
 
         def self.newSorpresa(mazo, nombre)
-            new(nil, nombre, SORPRESA, nil, mazo, nil)
+            new(nil, nombre, TipoCasilla::SORPRESA, nil, mazo, nil)
         end
 
         def informe(actual, todos)

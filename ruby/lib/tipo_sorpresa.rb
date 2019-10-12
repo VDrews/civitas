@@ -1,5 +1,5 @@
 module Civitas
-    module Tipo_Sorpresa
+    module TipoSorpresa
     IRCARCEL=:ircarcel
     IRCASILLA=:ircasilla
     PAGARCOBRAR=:pagarcobrar

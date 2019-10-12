@@ -1,4 +1,4 @@
-require './diario'
+require_relative('diario')
 
 module Civitas
     class MazoSorpresas

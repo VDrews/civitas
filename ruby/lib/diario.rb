@@ -7,15 +7,15 @@ module Civitas
       @eventos = []
     end
 
-    def ocurre_evento(e)
+    def ocurreEvento(e)
       @eventos << e
     end
 
-    def eventos_pendientes
+    def eventosPendientes
       return (@eventos.length > 0)
     end
 
-    def leer_evento
+    def leerEvento
       e = @eventos.shift
       return e
     end
