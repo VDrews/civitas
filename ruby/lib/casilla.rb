@@ -29,7 +29,7 @@ module Civitas
         end
 
         def self.newImpuesto(cantidad, nombre)
-            new(cantidad, nombre, TipoCasilla::IMPUESTO, nil, nil. nil)
+            new(cantidad, nombre, TipoCasilla::IMPUESTO, nil, nil, nil)
         end
 
         def self.newJuez(numCasillaCarcel, nombre)

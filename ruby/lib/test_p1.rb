@@ -64,7 +64,9 @@ module Civitas
             puts
             nombre = ["jug1","jug2","jug3","jug4"]
             civi = CivitasJuego.new(nombre)
-            # puts civi.toString()
+            #puts civi.toString()
+            civi.inicializaTablero(mazo)
+            civi.inicializaMazoSorpresas(tablero)
             
         end
 

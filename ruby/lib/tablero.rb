@@ -33,17 +33,17 @@ module Civitas
 
         def añadeCasilla(casilla)
             if (@casillas.length == @numCasillaCarcel) 
-                @casillas.push(Casilla.new("Cárcel"))
+                @casillas.push(Casilla.newDescanso("Cárcel"))
             end
-            Casilla.new(casilla)
+            @casillas.push(casilla)
             if (@casillas.length == @numCasillaCarcel) 
-                @casillas.push(Casilla.new("Cárcel"))
+                @casillas.push(Casilla.newDescanso("Cárcel"))
             end
         end
 
         def añadeJuez()
             if (!@tieneJuez)
-                @casillas.push(Casilla.new("Juez"))
+                @casillas.push(Casilla.newJuez(@numCasillaCarcel, "Juez"))
                 @tieneJuez = true
             end
         end
@@ -52,7 +52,7 @@ module Civitas
             if (correcto(numCasilla))
                 return @casillas[numCasilla]
             else
-                return null
+                return nil
             end
         end
 
