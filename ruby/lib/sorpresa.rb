@@ -117,7 +117,7 @@ module Civitas
         end
 
         def toString
-            return @texto
+            return "Texto: "+@texto.to_s
         end
 
         def usada

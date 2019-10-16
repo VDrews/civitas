@@ -14,6 +14,19 @@ module Civitas
             end
         end
 
+        def toString
+            #string="Sorpresas: "+@sorpresas.to_s
+            #string+=" Cartas especiales: "+@cartasEspeciales.to_s
+            string=" Barajada "+@barajada.to_s
+            string+=" Usadas "+@usadas.to_s
+            string+=" Debug: "+@debug.to_s
+            #La salida de lo comentado no es ortodoxa. Activar si realmente necesario
+            return string
+        end
+
+
+
+
         def alMazo(s)
             if (!@barajada)
                 @sorpresas.push(s)

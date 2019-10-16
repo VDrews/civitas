@@ -45,28 +45,28 @@ module Civitas
         #PRUEBA 2
         
             titu = TituloPropiedad.new("hoa", 20, 21, 22, 23, 24)
-            # puts titu.to_ss
-            # puts
-            puts TipoSorpresa::IRCARCEL
+            #puts titu.toString
+            #puts TipoSorpresa::IRCARCEL
             tablero = Tablero.new(10)
-            newcarcel = Sorpresa.new(tipo: TipoSorpresa::IRCARCEL, tablero: tablero)
-            puts newcarcel.toString()
+            #puts tablero.toString
+            newcarcel = Sorpresa.new(tipo: TipoSorpresa::IRCARCEL, tablero: tablero, texto:"CARCEL")
+            #puts newcarcel.toString()
             
             newotracasilla = Sorpresa.new(tipo: TipoSorpresa::IRCASILLA, tablero: tablero, valor: 100, texto: "VACIO")
-            puts newotracasilla.toString()
+            #puts newotracasilla.toString()
             
             newresto = Sorpresa.new(tipo: TipoSorpresa::PAGARCOBRAR, valor: 100, texto: "Vacio")
-            puts newresto.toString()
+            #puts newresto.toString()
             
             mazo = MazoSorpresas.new(false)
             newevita = Sorpresa.new(tipo: TipoSorpresa::SALIRCARCEL, mazo: mazo)
             puts newevita.toString
-            puts
             nombre = ["jug1","jug2","jug3","jug4"]
             civi = CivitasJuego.new(nombre)
-            #puts civi.toString()
-            civi.inicializaTablero(mazo)
-            civi.inicializaMazoSorpresas(tablero)
+            puts civi.toString()
+
+            puts "FIN DEBUG"
+            
             
         end
 

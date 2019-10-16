@@ -29,6 +29,16 @@ module Civitas
 
         attr_reader :CasasMax, :CasasPorHotel, :HotelesMax, :nombre, :numCasillaActual, :PrecioLibertad, :premioPasoSalida, :propiedades, :puedeComprar, :saldo
 
+        def toString
+            string=" Nombre: "+@nombre.to_s
+            string+="Salvoconducto: "+@salvoconducto.to_s
+            string+=" Cas actual: "+@numCasillaActual.to_s
+            string+=" Puede comprar: "+@puedeComprar.to_s
+            string+=" Saldo: "+@saldo.to_s
+            string+=" Encarcelado: "+@encarcelado.to_s
+        end
+
+
         def cancelarHipoteca(ip)
             #P3
         end
@@ -207,10 +217,6 @@ module Civitas
 
         def tieneSalvoConducto
             return @salvoconducto!=nil
-        end
-
-        def toString
-
         end
 
         def vender(ip)

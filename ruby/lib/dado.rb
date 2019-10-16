@@ -1,5 +1,4 @@
-
-require './diario'
+require_relative 'diario'
 require 'singleton'
 
 class Dado
@@ -48,6 +47,12 @@ class Dado
         return @@ultimoResultado
     end
 
+    def toString
+        string="Salida carcel: "+@@SalidaCarcel.to_s
+        string+=" Ultimo resultado: "+@@ultimoResultado.to_s
+        string+=" Debug: "+@@debug.to_s
+        return string
+    end
 
 
 

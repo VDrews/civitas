@@ -73,6 +73,14 @@ module Civitas
             return tirada
         end
 
+        def toString
+            string="Casilla cárcel: "+@numCasillaCarcel.to_s
+            #string+=", Casillas: "+@casillas.to_s
+            string+=", Juez: "+@tieneJuez.to_s
+            string+=", por Salida: "+@porSalida.to_s
+            #La salida de lo comentado no es ortodoxa. Activar si realmente necesario
+        end
+
 
 
     end

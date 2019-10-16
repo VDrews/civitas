@@ -38,15 +38,17 @@ module Civitas
         end
 
         def toString
-            string="Alquiler Base= "+@alquilerBase
-            +", Factor Revalorización: "+@factorRevalorizacion
-            +", Hipoteca Base: "+@hipotecaBase
-            +", Hipotecado: "+@hipotecado
-            +", Nombre: "+@nombre
-            +", Casas: "+@numCasas
-            +", Hoteles: "+@numHoteles
-            +", Precio compra: "+@precioCompra
-            +", Precio casa: "+@precioEdificar
+            string="Alquiler Base: "+@alquilerBase.to_s
+            string+=", Factor Revalorización: "+@factorRevalorizacion.to_s
+            string+=", Hipoteca Base: "+@hipotecaBase.to_s
+            string+=", Hipotecado: "+@hipotecado.to_s
+            string+=", Nombre: "+@nombre.to_s
+            string+=", Casas: "+@numCasas.to_s
+            string+=", Hoteles: "+@numHoteles.to_s
+            string+=", Precio compra: "+@precioCompra.to_s
+            string+=", Precio casa: "+@precioEdificar.to_s
+            string+=", Propietario: "+@propietario.to_s
+            #La salida de lo comentado no es ortodoxa. Activar si realmente necesario
 
             return string
         end

@@ -43,12 +43,12 @@ module Civitas
 
         def informe(actual, todos)
             if (jugadorCorrecto()) 
-                Diario.instance.ocurreEvento(todos[actual].getNombre() + ": Casilla " + toString());
+                Diario.instance.ocurreEvento(todos[actual].getNombre() + ": Casilla " + toString())
             end
         end
 
         def toString
-            return "Casilla: " + @nombre + "\nCarcel: " + @carcel + "\nImporte: " + @importe;
+            return "Casilla: " + @nombre.to_s + "\nCarcel: " + @carcel.to_s + "\nImporte: " + @importe.to_s
         end
 
         def jugadorCorrecto(actual, todos)
