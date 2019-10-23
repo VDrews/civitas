@@ -48,15 +48,15 @@ module Civitas
             #puts titu.toString
             #puts TipoSorpresa::IRCARCEL
             tablero = Tablero.new(10)
-            #puts tablero.toString
+            puts tablero.toString
             newcarcel = Sorpresa.new(tipo: TipoSorpresa::IRCARCEL, tablero: tablero, texto:"CARCEL")
-            #puts newcarcel.toString()
+            puts newcarcel.toString()
             
             newotracasilla = Sorpresa.new(tipo: TipoSorpresa::IRCASILLA, tablero: tablero, valor: 100, texto: "VACIO")
-            #puts newotracasilla.toString()
+            puts newotracasilla.toString()
             
             newresto = Sorpresa.new(tipo: TipoSorpresa::PAGARCOBRAR, valor: 100, texto: "Vacio")
-            #puts newresto.toString()
+            puts newresto.toString()
             
             mazo = MazoSorpresas.new(false)
             newevita = Sorpresa.new(tipo: TipoSorpresa::SALIRCARCEL, mazo: mazo)

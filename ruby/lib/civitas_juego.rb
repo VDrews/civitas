@@ -42,10 +42,6 @@ module Civitas
             return string
         end
 
-
-
-
-
         def actualizarInfo
             puts "Jugador: " + @jugadores[actual].toString
 
