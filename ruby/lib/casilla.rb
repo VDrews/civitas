@@ -56,10 +56,18 @@ module Civitas
         end
 
         def recibeJugador(actual, todos)
-            if (jugadorCorrecto(actual, todos)) 
+            case @tipo
+            when TipoCasilla::CALLE
+                recibeJugador_calle(actual, todos)
+            when TipoCasilla::IMPUESTO
+                recibeJugador_impuesto(actual, todos)
+            when TipoCasilla::JUEZ
+                recibeJugador_juez(actual, todos)
+            when TipoCasilla::SORPRESA
+                recibeJugador_sorpresa(actual, todos)
+            else
                 informe(actual, todos)
             end
-            
         end
 
         private
@@ -68,7 +76,17 @@ module Civitas
         end
 
         def recibeJugador_calle(actual, todos)
-            #P3
+            if jugadorCorrecto(actual, todos)
+                informe(actual, todos)
+                jugador = Jugador.new()
+                jugador = todos[actual].clone
+
+                if !@tituloPropiedad.tienePropietario
+                    jugador.puedeComprarCasilla
+                else
+                    @tituloPropiedad.tramitarAlquiler(nuevo)
+                end
+            end
         end
 
         def recibeJugador_juez(actual, todos)

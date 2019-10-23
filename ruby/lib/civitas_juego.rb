@@ -102,6 +102,22 @@ module Civitas
             @estado.siguienteEstado(getJugadorActual(), @estado, operacion)
         end
 
+        def siguientePaso
+            jugadorActual = @jugadores[@indiceJugadorActual]
+            operacion = GestorEstados.operacionesPermitidas(jugadorActual, @estado)
+
+            if operacion == EstadosJuego::PASAR_TURNO
+                pasarTurno
+                siguientePasoCompletado(operacion)
+            elsif operacion == EstadosJuego::AVANZAR 
+               avanzaJugador
+               siguientePasoCompletado(operacion)  
+            end
+
+            return operacion
+
+        end
+
         def getCasillaActual
             return @tablero.getCasilla(getJugadorActual().getNumCasillaActual())
         end
@@ -119,7 +135,19 @@ module Civitas
         end
         
         def avanzaJugador
-            #No P2
+            jugadorActual = getJugadorActual
+            posicionActual = jugadorActual.getNumCasillaActual
+            tirada = Dado.getInsance().tirar
+            posicionNueva = @tablero.posicionNueva(posicionActual, tirada)
+            casilla = @tablero.getCasilla(posicionNueva)
+
+            contabilizarPasosPorSalida(jugadorActual)
+
+            jugadorActual.moverACasilla(posicionNueva)
+
+            casilla.recibeJugador(@indiceJugadorActual, @jugadores)
+            
+            contabilizarPasosPorSalida(jugadorActual)
         end
 
         def infoJugadorTexto
@@ -127,11 +155,11 @@ module Civitas
         end
 
         def cancelarHipoteca(ip)
-            @jugadores[@indiceJugadorActual].cancelarHipoteca(ip)
+            @jugadores[@indiceJugadorActual].cancelarHipoteca(ip)            
         end
 
         def comprar
-            #P3
+            #Boolean
         end
 
         def finalDelJuego
