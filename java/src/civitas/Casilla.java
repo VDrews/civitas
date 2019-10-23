@@ -1,5 +1,7 @@
 package civitas;
 
+import java.util.ArrayList;
+
 public class Casilla {
     private String nombre;
     private static int carcel;
