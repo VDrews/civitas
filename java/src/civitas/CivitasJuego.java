@@ -8,15 +8,15 @@ public class CivitasJuego {
     private int indiceJugadorActual;
     private ArrayList<Jugador> jugadores;
     private EstadosJuego estado;
-    private gestorEstados gestorEstados;
+    private GestorEstados gestorEstados;
     private Tablero tablero;
     private MazoSorpresas mazo;
 
     //Constructor
     public CivitasJuego(ArrayList<String> nombres) {
-        jugadores = new ArrayList<jugadores>();
+        jugadores = new ArrayList<Jugador>();
         for (int i = 0; i < nombres.size(); i++) {
-            jugadores.add(new Jugador(nombres[i]));
+            jugadores.add(new Jugador(nombres.get(i)));
         }
 
         gestorEstados = new GestorEstados();
@@ -29,8 +29,8 @@ public class CivitasJuego {
 
     }
 
-    void actualizarInfo() {
-        System.out.println("Jugador: " + jugadores[actual].toString());
+    public void actualizarInfo() {
+        System.out.println("Jugador: " + jugadores.get(indiceJugadorActual).toString());
 
         if (algunoEnBancarrota()) {
             ranking();
@@ -90,7 +90,7 @@ public class CivitasJuego {
         return tablero.getCasilla(getJugadorActual().getNumCasillaActual()); 
     }
     public Jugador getJugadorActual() {
-        return jugadores[indiceJugadorActual];
+        return jugadores.get(indiceJugadorActual);
     }
     public void siguientePasoCompleado(OperacionesJuego operacion) {
         estado.siguienteEstado(getJugadorActual(), estado, operacion);
@@ -136,12 +136,12 @@ public class CivitasJuego {
         return enBancarrota;
     }
 
-    public boolean finalDelJuego(int ip) {
+    public boolean finalDelJuego() {
         return algunoEnBancarrota();
     }
 
     private ArrayList<Jugador> ranking() {
-        ArrayList<jugador> jugadores_ordenados = new ArrayList<jugador>(jugadores);
+        ArrayList<Jugador> jugadores_ordenados = new ArrayList<Jugador>(jugadores);
         
         Collection.sort(jugadores_ordenados, new Comparable());
 
@@ -153,9 +153,9 @@ public class CivitasJuego {
 
     // }
 
-    // public OperacionesJuego siguientePaso() {
+     public OperacionesJuego siguientePaso() {
 
-    // }
+     }
 
     // public boolean comprar() {}
 }

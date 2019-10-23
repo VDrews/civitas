@@ -5,7 +5,7 @@ package civitas;
 public class TituloPropiedad {
 
     private float alquilerBase;
-    private static float factorInteresesHipoteca = 1.1;
+    private static float factorInteresesHipoteca=(float) 1.1;
     private float factorRevalorizacion;
     private float hipotecaBase;
     private boolean hipotecado;
@@ -30,7 +30,8 @@ public class TituloPropiedad {
     }
 
     public String toString() {
-        return "Nombre: " + alquilerBase + 
+        return "Nombre: " + nombre + 
+        "\nAlquiler base: "+ alquilerBase +
         "\nFactor de Revalorización: " + factorRevalorizacion +
         "\nHipoteca Base: " + hipotecaBase +
         "\nHipotecado: " + hipotecado +
@@ -142,7 +143,7 @@ public class TituloPropiedad {
         return (jugador.getNombre() == propietario.getNombre()); // Considerando que los nombres de los jugadores son únicos
     }
     boolean tienePropietario() {
-        if (propietario) return true;
+        if (propietario!=null) return true;
         return false;
     }
     Jugador getPropietario() {

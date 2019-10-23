@@ -1,5 +1,7 @@
 package civitas;
 
+import java.util.ArrayList;
+
 // SIN ACABAR
 
 public class Sorpresa {
@@ -45,13 +47,13 @@ public class Sorpresa {
     }
 
     public boolean jugadorCorrecto(int actual, ArrayList<Jugador> todos) {
-        if (actual >= 0 && actual < todos.length) {
-            return todos[actual];
+        if (actual >= 0 && actual < todos.size()) {
+            return todos.(actual);
         }
     }
 
     private void informe(int actual, ArrayList<Jugador> todos) {
-        Diario.getInstance().ocurreEvento("Se está aplicando una sorpresa a: " + todos[actual].getNombre());
+        Diario.getInstance().ocurreEvento("Se está aplicando una sorpresa a: " + todos.get(actual).getNombre());
     }
 
     void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
@@ -64,7 +66,7 @@ public class Sorpresa {
             case TipoSorpresa.IRCASILLA:
                 aplicarAJugador_irACasilla(actual, todos);
                 break;
-        case TipoSorpresa.PORCASAHOTEL:
+            case TipoSorpresa.PORCASAHOTEL:
                 aplicarAJugador_porCasaHotel(actual, todos);
                 break;
             case TipoSorpresa.PORJUGADOR:
@@ -82,7 +84,7 @@ public class Sorpresa {
     }
 
     private void aplicarAJugador_irCarcel(int actual, ArrayList<Jugador> todos) {
-        todos[actual].encarcelar(valor);
+        todos.get(actual).encarcelar(valor);
     }
 
     private void aplicarAJugador_irACasilla(int actual, ArrayList<Jugador> todos) {
@@ -90,11 +92,11 @@ public class Sorpresa {
     }
 
     private void aplicarAJugador_pagarCobrar(int actual, ArrayList<Jugador> todos) {
-        todos[actual].modificarSaldo(valor);
+        todos.get(actual).modificarSaldo(valor);
     }
     
     private void aplicarAJugador_porCasaHotel(int actual, ArrayList<Jugador> todos) {
-        todos[actual].modificarSaldo(valor * todos[actual].getPropiedades().length);
+        todos.get(actual).modificarSaldo(valor * todos.get(actual).getPropiedades().length);
     }
 
     private void aplicarAJugador_porJugador(int actual, ArrayList<Jugador> todos) {
@@ -108,7 +110,7 @@ public class Sorpresa {
             }
 
             if (tieneSalvoConducto) {
-                todos[actual].obtenerSalvoConducto();
+                todos.get(actual).obtenerSalvoConducto();
                 salirDelMazo();
             }
         }

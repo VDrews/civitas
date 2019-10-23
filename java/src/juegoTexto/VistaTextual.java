@@ -3,6 +3,7 @@ package juegoTexto;
 import civitas.CivitasJuego;
 import civitas.Diario;
 import civitas.OperacionesJuego;
+import civitas.Respuestas;
 import civitas.SalidasCarcel;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -76,25 +77,40 @@ class VistaTextual {
     return (SalidasCarcel.values()[opcion]);
   }
 
-  Respuestas comprar() {}
+  Respuestas comprar() {
+    int opcion = menu("Desea comprar la calle?", 
+      new ArrayList<>(Arrays.asList("No","Si")));
+    return (Respuestas.values()[opcion]);
+  }
 
-  void gestionar () {}
+  void gestionar () {
+    int opcion = menu("Desea realizar alguna gestion?",
+      new ArrayList<>(Arrays.asList("Vender propiedad","Hipotecar propiedad",
+      "Cancelar una hipoteca","Construir casa","Construir hotel","Terminar")));
+    iGestion=opcion;
+    //Propiedad jugador actual?
+    
+  }
   
-  public int getGestion(){}
+  public int getGestion(){return iGestion;}
   
-  public int getPropiedad(){}
+  public int getPropiedad(){return iPropiedad;}
     
 
   void mostrarSiguienteOperacion(OperacionesJuego operacion) {}
 
 
-  void mostrarEventos() {}
+  void mostrarEventos() {
+    while(Diario.getInstance().eventosPendientes())
+      mostrarEstado(Diario.getInstance().leerEvento());
+  }
   
   public void setCivitasJuego(CivitasJuego civitas){ 
         juegoModel=civitas;
         this.actualizarVista();
-
     }
   
-  void actualizarVista(){} 
+  void actualizarVista(){
+  
+  } 
 }

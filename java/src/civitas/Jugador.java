@@ -1,5 +1,7 @@
 package civitas;
 
+import java.util.ArrayList;
+
 // ENCARCELAR
 
 public class Jugador implements Comparable<Jugador> {
@@ -184,9 +186,16 @@ public class Jugador implements Comparable<Jugador> {
 
     private String toString() {return "";}
 
+    public String getNombre(){return nombre;}
+
     public int getNumCasillaActual() {
         return numCasillaActual;
     }
+    public boolean isEncarcelado(){
+        return encarcelado;
+    }
+
+    public boolean getPuedeComprar() {return puedeComprar;}
 
     //P3
     // cancelarHipoteca(int ip)
