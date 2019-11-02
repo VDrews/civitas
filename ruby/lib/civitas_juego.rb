@@ -1,13 +1,15 @@
 require_relative('jugador')
 require_relative('estados_juego')
+require_relative('operaciones_juego')
 require_relative('gestor_estados')
 require_relative('mazo_sorpresas')
 require_relative('dado')
 require_relative('tablero')
+require_relative('sorpresa')
+require_relative('tipo_sorpresa')
 
 module Civitas
     class CivitasJuego
-
         def initialize(nombres)
             @jugadores = []
 
@@ -29,7 +31,6 @@ module Civitas
 
             @estado = EstadosJuego::INICIO_TURNO
         end
-
 
         def toString
             string=" Indice actual: "+@indiceJugadorActual.to_s
@@ -99,17 +100,17 @@ module Civitas
         end
 
         def siguientePasoCompletado(operacion)
-            @estado.siguienteEstado(getJugadorActual(), @estado, operacion)
+            @estado = @gestorEstados.siguienteEstado(getJugadorActual(), @estado, operacion)
         end
 
         def siguientePaso
             jugadorActual = @jugadores[@indiceJugadorActual]
-            operacion = GestorEstados.operacionesPermitidas(jugadorActual, @estado)
+            operacion = @gestorEstados.operacionesPermitidas(jugadorActual, @estado)
 
-            if operacion == EstadosJuego::PASAR_TURNO
+            if operacion == Operaciones_juego::PASAR_TURNO
                 pasarTurno
                 siguientePasoCompletado(operacion)
-            elsif operacion == EstadosJuego::AVANZAR 
+            elsif operacion == Operaciones_juego::AVANZAR 
                avanzaJugador
                siguientePasoCompletado(operacion)  
             end
@@ -119,7 +120,7 @@ module Civitas
         end
 
         def getCasillaActual
-            return @tablero.getCasilla(getJugadorActual().getNumCasillaActual())
+            return @tablero.getCasilla(getJugadorActual().numCasillaActual)
         end
         
         def getJugadorActual
@@ -136,9 +137,11 @@ module Civitas
         
         def avanzaJugador
             jugadorActual = getJugadorActual
-            posicionActual = jugadorActual.getNumCasillaActual
-            tirada = Dado.getInsance().tirar
-            posicionNueva = @tablero.posicionNueva(posicionActual, tirada)
+            posicionActual = getJugadorActual.numCasillaActual
+            tirada = Dado.instance().tirar
+
+            posicionNueva = @tablero.nuevaPosicion(posicionActual, tirada)
+
             casilla = @tablero.getCasilla(posicionNueva)
 
             contabilizarPasosPorSalida(jugadorActual)
@@ -151,7 +154,8 @@ module Civitas
         end
 
         def infoJugadorTexto
-            #No P2
+            jugadorActual = @jugadores[@indiceJugadorActual]
+            puts "Jugador: #[jugadorActual.toString]"
         end
 
         def cancelarHipoteca(ip)
@@ -159,12 +163,16 @@ module Civitas
         end
 
         def comprar
-            #Boolean
+            jugadorActual = @jugadores[@indiceJugadorActual]
+            numCasillaActual = jugadorActual.getNumCasillaActual
+            casilla = @tablero.getCasilla(numCasillaActual)
+            titulo = casilla.getTituloPropiedad
+            return jugadorActual.comprar(titulo)
         end
 
         def finalDelJuego
-            for i in @jugadores do
-                if @jugadores[i].enBancarrota
+            for jugador in @jugadores do
+                if jugador.enBancarrota
                     return true
                 end
             end
@@ -174,7 +182,6 @@ module Civitas
         def algunoEnBancarrota
             finalDelJuego
         end
-
 
         def vender(ip)
             @jugadores[@indiceJugadorActual].vender(ip)
@@ -193,9 +200,7 @@ module Civitas
         end
 
         def ranking
-
         end    
 
-        
     end
 end

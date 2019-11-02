@@ -42,8 +42,8 @@ module Civitas
         end
 
         def informe(actual, todos)
-            if (jugadorCorrecto()) 
-                Diario.instance.ocurreEvento(todos[actual].getNombre() + ": Casilla " + toString())
+            if (jugadorCorrecto(actual, todos)) 
+                Diario.instance.ocurreEvento(todos[actual].nombre + ": Casilla " + toString())
             end
         end
 
@@ -78,10 +78,9 @@ module Civitas
         def recibeJugador_calle(actual, todos)
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
-                jugador = Jugador.new()
                 jugador = todos[actual].clone
 
-                if !@tituloPropiedad.tienePropietario
+                if !@tituloPropiedad.tienePropietario(jugador)
                     jugador.puedeComprarCasilla
                 else
                     @tituloPropiedad.tramitarAlquiler(nuevo)
@@ -94,7 +93,12 @@ module Civitas
         end
 
         def recibeJugador_sorpresa(actual, todos)
-            #P3
+            if jugadorCorrecto(actual, todos)
+                sorpresa = mazo.siguiente
+                informe(actual, todos)
+                sorpresa.aplicarAJugador(actual, todos)
+            end
+
         end
 
         private_class_method :new

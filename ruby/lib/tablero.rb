@@ -1,3 +1,5 @@
+require_relative 'casilla'
+
 module Civitas
     class Tablero
         def initialize(indexCarcel)
@@ -57,10 +59,11 @@ module Civitas
         end
 
         def nuevaPosicion(actual, tirada)
-            if (correcto()) 
-                return -1
+            if (correcto(actual + tirada)) 
+                return (actual + tirada) % @casillas.length
             end
-            return (actual + tirada) % @casillas.length
+            
+            return -1
         end
 
         def calcularTirada(origen, destino)

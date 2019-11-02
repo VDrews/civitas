@@ -5,6 +5,8 @@ require_relative('titulo_propiedad')
 module Civitas
     class Jugador
 
+        attr_reader :salvoconducto, :propiedades, :nombre, :numCasillaActual, :puedeComprar, :saldo, :encarcelado
+
         def initialize(nombre)
             @salvoconducto=nil
             @propiedades=nil
@@ -26,18 +28,6 @@ module Civitas
 
         private
         @@SaldoInicial=7500
-
-        attr_reader :CasasMax, :CasasPorHotel, :HotelesMax, :nombre, :numCasillaActual, :PrecioLibertad, :premioPasoSalida, :propiedades, :puedeComprar, :saldo
-
-        def toString
-            string=" Nombre: "+@nombre.to_s
-            string+="Salvoconducto: "+@salvoconducto.to_s
-            string+=" Cas actual: "+@numCasillaActual.to_s
-            string+=" Puede comprar: "+@puedeComprar.to_s
-            string+=" Saldo: "+@saldo.to_s
-            string+=" Encarcelado: "+@encarcelado.to_s
-        end
-
 
         def cancelarHipoteca(ip)
             result = false
@@ -95,7 +85,23 @@ module Civitas
         end
 
         def construirCasa(ip)
-            #P3
+            if encarcelado
+                return result
+            end
+
+            if existeLaPropiedad(ip)
+                propiedad = propiedades[ip]
+                puedoEdificarCasa = puedoEdificarCasa(propiedad)
+
+                precio = propiedad.getPrecioEdificar
+                if puedoGastar(precio) && propiedad.numCasas < getCasasMax
+                    puedoEdificarCasa = true
+                end
+
+                if puedoEdificarCasa
+                    result = propiedad.getPrecioEdificar
+                end
+            end
         end
 
         def construirHotel(ip)
@@ -130,7 +136,6 @@ module Civitas
             return result
         end
 
-        #protected
         private
         def debeSerEncarcelado
             if @encarcelado
@@ -149,6 +154,15 @@ module Civitas
             return @saldo <= 0
         end
 
+        def toString
+            string=" Nombre: "+@nombre.to_s
+            string+="Salvoconducto: "+@salvoconducto.to_s
+            string+=" Cas actual: "+@numCasillaActual.to_s
+            string+=" Puede comprar: "+@puedeComprar.to_s
+            string+=" Saldo: "+@saldo.to_s
+            string+=" Encarcelado: "+@encarcelado.to_s
+        end
+
         def encarcelar(numCasillaCarcel)
             if debeSerEncarcelado
                 moverACasilla(numCasillaCarcel)
@@ -156,6 +170,20 @@ module Civitas
                 Diario.instance.ocurreEvento("El jugador "+@nombre+" ha sido encarcelado")
             end
             return @encarcelado
+        end
+
+        def isEncarcelado
+            return @encarcelado
+        end
+
+        def moverACasilla(numCasilla)
+            if (@encarcelado) 
+                return false
+            else 
+                @numCasillaActual = numCasilla
+                @puedeComprar = false
+                Diario.instance.ocurreEvento("Se ha desplazado a la casilla: #{numCasilla}")
+            end
         end
 
         private
@@ -182,24 +210,10 @@ module Civitas
             return result
         end
 
-        def isEncarcelado
-            ret encarcelado
-        end
-
         def modificarSaldo(cantidad)
             @saldo += cantidad
             Diario.instance.ocurreEvento("Se ha modificado el saldo en: " + cantidad + ", SALDO ACTUAL: " + @saldo)
             return true
-        end
-
-        def moverACasilla(numCasilla)
-            if (encarcelado) 
-                return false
-            else 
-                @numCasillaActual = numCasilla
-                @puedeComprar = false
-                Diario.instance.ocurreEvento("Se ha desplazado a la casilla: " + numCasilla)
-            end
         end
 
         def obtenerSalvoconducto(sorpresa)

@@ -5,6 +5,14 @@ require 'io/console'
 module Civitas
 
   class Vista_textual
+    #Actualizar vista 
+    #Controlador::Juega
+    def initialize
+      @in
+      @iPropiedad = 0
+      @iGestion = 0
+      @juegoModel
+    end
 
     def mostrar_estado(estado)
       puts estado
@@ -59,23 +67,49 @@ module Civitas
       return opcion
     end
 
+    def salirCarcel
+      lista_Respuestas = [SalidasCarcel::PAGANDO, SalidasCarcel::TIRANDO]
+      return lista_Respuestas[menu("¿Cómo quieres salir de la cárcel?", ["PAGANDO", "TIRANDO"])]
+    end
     
     def comprar
+      lista_Respuestas = [Respuestas::NO, Respuestas::Si]
+      return lista_Respuestas[menu("¿Quieres comprar la calle?", ["NO", "SI"])]
     end
 
     def gestionar
+      lista_Respuestas = [GestionesInmobiliarias::VENDER, GestionesInmobiliarias::HIPOTECAR, GestionesInmobiliarias::CANCELAR_HIPOTECA, GestionesInmobiliarias::CONSTRUIR_CASA, GestionesInmobiliarias::CONSTRUIR_HOTEL, GestionesInmobiliarias::TERMINAR]
+      return lista_Respuestas[menu("Número de gestión de inmobiliaria", ["VENDER", "HIPOTECAR", "CANCELAR_HIPOTECA", "CONSTRUIR_CASA", "CONSTRUIR_CASA", "CONSTRUIR_HOTEL", "TERMINAR"])]
     end
 
     def getGestion
+      return @iGestion
     end
 
     def getPropiedad
+      return @iPropiedad
     end
 
     def mostrarSiguienteOperacion(operacion)
+      case operacion
+      when Operaciones_juego::PASAR_TURNO
+        puts "PASAR_TURNO"
+      when Operaciones_juego::SALIR_CARCEL
+        puts "SALIR_CARCEL"
+      when Operaciones_juego::AVANZAR
+        puts "AVANZAR"
+      when Operaciones_juego::COMPRAR
+        puts "COMPRAR"
+      when Operaciones_juego::GESTIONAR
+        puts "GESTIONAR"
+
+      end
     end
 
     def mostrarEventos
+      while Diario.instance.eventosPendientes
+        puts Diario.instance.leerEvento
+      end
     end
 
     def setCivitasJuego(civitas)
@@ -84,6 +118,7 @@ module Civitas
     end
 
     def actualizarVista
+      @juegoModel.infoJugadorTexto
     end
 
     
