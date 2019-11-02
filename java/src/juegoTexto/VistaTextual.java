@@ -66,8 +66,8 @@ class VistaTextual {
     }
 
     opcion = leeEntero(lista.size(),
-                          "\n"+tab+"Elige una opción: ",
-                          tab+"Valor erróneo");
+                       "\n"+tab+"Elige una opción: ",
+                       tab+"Valor erróneo");
     return opcion;
   }
 

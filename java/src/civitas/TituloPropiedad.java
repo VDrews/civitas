@@ -1,7 +1,5 @@
 package civitas;
 
-//construirCasa
-
 public class TituloPropiedad {
 
     private float alquilerBase;
@@ -30,7 +28,7 @@ public class TituloPropiedad {
     }
 
     public String toString() {
-        return "Nombre: " + nombre + 
+        return "Nombre: " + nombre +
         "\nAlquiler base: "+ alquilerBase +
         "\nFactor de Revalorización: " + factorRevalorizacion +
         "\nHipoteca Base: " + hipotecaBase +
@@ -79,8 +77,9 @@ public class TituloPropiedad {
 
     void tramitarAlquiler(Jugador jugador) {
         if (tienePropietario() && !esEsteElPropietario(jugador)) {
-            jugador.pagaAlquiler(alquilerBase);
-            getPropietario().recibe(alquilerBase);
+            float precio=getPrecioAlquiler();
+            jugador.pagaAlquiler(precio);
+            getPropietario().recibe(precio);
         }
     }
 
@@ -129,13 +128,13 @@ public class TituloPropiedad {
 
     }
 
-    boolean Comprar(Jugador jugador) {
+    boolean comprar(Jugador jugador) {
         if (tienePropietario()) {
             return false;
         }
         else {
             propietario = jugador;
-            jugador.paga(getPrecioVenta());
+            jugador.paga(precioCompra);
             return true;
         }
     }
@@ -143,11 +142,34 @@ public class TituloPropiedad {
         return (jugador.getNombre() == propietario.getNombre()); // Considerando que los nombres de los jugadores son únicos
     }
     boolean tienePropietario() {
-        if (propietario!=null) return true;
-        return false;
+        return propietario!=null;
     }
     Jugador getPropietario() {
         return propietario;
+    }
+
+    int getNumCasas() {
+        return numCasas;
+    }
+
+    String getNombre() {
+        return nombre;
+    }
+
+    public boolean getHipotecado(){
+        return hipotecado;
+    }
+    
+    int getNumHoteles() {
+        return numHoteles;
+    }
+
+    float getPrecioCompra() {
+        return precioCompra;
+    }
+
+    float getPrecioEdificar() {
+        return precioEdificar;
     }
 
 

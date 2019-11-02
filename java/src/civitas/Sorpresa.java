@@ -44,12 +44,11 @@ public class Sorpresa {
     void init() {
         valor = -1;
         texto = "";
+        mazo=null; tablero=null;
     }
 
     public boolean jugadorCorrecto(int actual, ArrayList<Jugador> todos) {
-        if (actual >= 0 && actual < todos.size()) {
-            return todos.(actual);
-        }
+        return (actual >= 0 && actual < todos.size());
     }
 
     private void informe(int actual, ArrayList<Jugador> todos) {
@@ -60,25 +59,24 @@ public class Sorpresa {
         if (!jugadorCorrecto(actual, todos)) return;
         informe(actual, todos);
         switch(tipo) {
-            case TipoSorpresa.IRCARCEL:
+            case IRCARCEL:
                 aplicarAJugador_irCarcel(actual, todos);
                 break;
-            case TipoSorpresa.IRCASILLA:
+            case IRCASILLA:
                 aplicarAJugador_irACasilla(actual, todos);
                 break;
-            case TipoSorpresa.PORCASAHOTEL:
+            case PORCASAHOTEL:
                 aplicarAJugador_porCasaHotel(actual, todos);
                 break;
-            case TipoSorpresa.PORJUGADOR:
-                aplicarAJugador_pagarJugador(actual, todos);
+            case PORJUGADOR:
+                aplicarAJugador_porJugador(actual, todos);
                 break;
-            case TipoSorpresa.SALIRCARCEL:
+            case SALIRCARCEL:
                 aplicarAJugador_salirCarcel(actual, todos);
                 break;
-            case TipoSorpresa.PAGARCOBRAR:
+            case PAGARCOBRAR:
+                aplicarAJugador_pagarCobrar(actual, todos);
                 break;
-            default: 
-                assert("El tipo de sorpresa no está definido");
         }
         
     }
@@ -88,7 +86,10 @@ public class Sorpresa {
     }
 
     private void aplicarAJugador_irACasilla(int actual, ArrayList<Jugador> todos) {
-        tablero.calcularTirada(actual, valor);
+        int tirada=tablero.calcularTirada(actual, valor);
+        int numCasilla=tablero.nuevaPosicion(actual, tirada);
+        todos.get(actual).moverACasilla(numCasilla);
+        tablero.getCasilla(valor).recibeJugador(actual, todos);
     }
 
     private void aplicarAJugador_pagarCobrar(int actual, ArrayList<Jugador> todos) {
@@ -96,16 +97,22 @@ public class Sorpresa {
     }
     
     private void aplicarAJugador_porCasaHotel(int actual, ArrayList<Jugador> todos) {
-        todos.get(actual).modificarSaldo(valor * todos.get(actual).getPropiedades().length);
+        todos.get(actual).modificarSaldo(valor * todos.get(actual).cantidadCasasHoteles());
     }
 
     private void aplicarAJugador_porJugador(int actual, ArrayList<Jugador> todos) {
-        Sorpresa s1 = new Sorpresa();
+        Sorpresa s1 = new Sorpresa(TipoSorpresa.PAGARCOBRAR, valor*-1, "Quita");
+        for (int i=0; i<todos.size(); i++){
+            if(i!=actual) s1.aplicarAJugador(i, todos);
+        }
+        
+        Sorpresa s2=new Sorpresa(TipoSorpresa.PAGARCOBRAR, valor*(todos.size()-1), "Pon");
+        s2.aplicarAJugador(actual, todos);
     }
     private void aplicarAJugador_salirCarcel(int actual, ArrayList<Jugador> todos) {
         boolean tieneSalvoConducto = false;
         for (int i = 0; i < todos.size() && !tieneSalvoConducto; i++) {
-            if (todos[i].tieneSalvoConducto()) {
+            if (todos.get(i).tieneSalvoConducto()) {
                 tieneSalvoConducto = true;
             }
 
@@ -116,13 +123,13 @@ public class Sorpresa {
         }
     }
     void salirDelMazo() {
-        if (tipo == tipo.SALIRCARCEL) {
+        if (tipo == TipoSorpresa.SALIRCARCEL) {
             mazo.inhabilitarCartaEspecial(this);
         }
     }
 
     void usada() {
-        if (tipo == tipo.SALIRCARCEL) {
+        if (tipo == TipoSorpresa.SALIRCARCEL) {
             mazo.habilitarCartaEspecial(this);
         }
     }
