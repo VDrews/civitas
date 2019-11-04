@@ -3,17 +3,17 @@ package civitas;
 import java.util.ArrayList;
 
 public class Jugador implements Comparable<Jugador> {
-    private final static int CasasMax = 4;
-    private final static int CasasPorHotel = 4;
-    private boolean encarcelado;
-    private static final int HotelesMax = 4;
+    protected final static int CasasMax = 4;
+    protected final static int CasasPorHotel = 4;
+    protected boolean encarcelado;
+    protected static final int HotelesMax = 4;
     private String nombre;
     private int numCasillaActual;
-    private final static int pasoPorSalida = 1000;
-    private final static int precioLibertad = 200;
+    protected final static int pasoPorSalida = 1000;
+    protected final static int precioLibertad = 200;
     private boolean puedeComprar;
     private float saldo;
-    private static float saldoInicial = 7500;
+    private final static float saldoInicial = 7500;
     private Sorpresa salvoconducto;
     private ArrayList<TituloPropiedad> propiedades;
 
@@ -128,6 +128,7 @@ public class Jugador implements Comparable<Jugador> {
     }
 
     private boolean puedoGastar(float precio) {
+        if(encarcelado) return false;
         return saldo >= precio;
     }
 
@@ -152,7 +153,7 @@ public class Jugador implements Comparable<Jugador> {
 
     boolean salirCarcelPagando() {
         if (encarcelado && puedeSalirCarcelPagando()) {
-            paga(precioLibertad);
+            paga(getPrecioLibertad());
             encarcelado = false;
             Diario.getInstance().ocurreEvento("Jugador: " + nombre + " ha salido de la carcel PAGANDO");
             return true;
@@ -172,7 +173,7 @@ public class Jugador implements Comparable<Jugador> {
     }
     
     boolean pasaPorSalida() {
-        modificarSaldo(pasoPorSalida);
+        modificarSaldo(getPrecioPasoSalida());
         Diario.getInstance().ocurreEvento("Jugador: " + nombre + " ha pasado por la salida");
         return true;
     }
@@ -189,27 +190,22 @@ public class Jugador implements Comparable<Jugador> {
         else return 0;
     }
 
-    public String toString() {return "";}
+    //Temporal. Estado completo?
+    public String toString() {return nombre;}
 
     protected String getNombre(){return nombre;}
 
-    public int getNumCasillaActual() {
+    int getNumCasillaActual() {
         return numCasillaActual;
     }
     public boolean isEncarcelado(){
         return encarcelado;
     }
 
-    public boolean getPuedeComprar() {return puedeComprar;}
+    boolean getPuedeComprar() {return puedeComprar;}
+    protected float getSaldo(){return saldo;}
 
-	public boolean tieneSalvoConducto() {
-		return false;
-	}
-
-	public void obtenerSalvoConducto() {
-	}
-
-	public int cantidadCasasHoteles() {
+	int cantidadCasasHoteles() {
         int cant=0;
 		for (int i=0; i<propiedades.size(); i++){
             cant+=propiedades.get(i).cantidadCasasHoteles();
@@ -231,6 +227,11 @@ public class Jugador implements Comparable<Jugador> {
         }
         return result;
     }
+
+    private float getPrecioLibertad(){return precioLibertad;}
+    private float getPrecioPasoSalida(){return pasoPorSalida;}
+
+    protected ArrayList<TituloPropiedad> getPropiedades(){return propiedades;}
 
     boolean comprar(TituloPropiedad titulo){
         boolean result=false;

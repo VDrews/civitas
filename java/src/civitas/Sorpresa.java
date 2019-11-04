@@ -2,8 +2,6 @@ package civitas;
 
 import java.util.ArrayList;
 
-// SIN ACABAR
-
 public class Sorpresa {
     private String texto; // Definir por cada tipo
     private int valor;
@@ -12,6 +10,7 @@ public class Sorpresa {
     private TipoSorpresa tipo;
 
     Sorpresa(TipoSorpresa tipo, Tablero tablero) {
+        init();
         this.tipo = tipo;
         this.tablero = tablero;
 
@@ -24,6 +23,7 @@ public class Sorpresa {
     }
 
     Sorpresa(TipoSorpresa tipo, Tablero tablero, int valor, String texto) {
+        init();
         this.tipo = tipo;
         this.tablero = tablero;
         this.valor = valor;
@@ -31,17 +31,19 @@ public class Sorpresa {
     }
 
     Sorpresa(TipoSorpresa tipo, int valor, String texto) {
+        init();
         this.tipo = tipo; 
         this.valor = valor;
         this.texto = texto;
     }
 
     Sorpresa(TipoSorpresa tipo, MazoSorpresas mazo) {
+        init();
         this.tipo = tipo; 
         this.mazo = mazo;
     }
 
-    void init() {
+    private void init() {
         valor = -1;
         texto = "";
         mazo=null; tablero=null;
@@ -110,14 +112,14 @@ public class Sorpresa {
         s2.aplicarAJugador(actual, todos);
     }
     private void aplicarAJugador_salirCarcel(int actual, ArrayList<Jugador> todos) {
-        boolean tieneSalvoConducto = false;
-        for (int i = 0; i < todos.size() && !tieneSalvoConducto; i++) {
-            if (todos.get(i).tieneSalvoConducto()) {
-                tieneSalvoConducto = true;
+        boolean alguienTieneSalvoConducto = false;
+        for (int i = 0; i < todos.size() && !alguienTieneSalvoConducto; i++) {
+            if (todos.get(i).tieneSalvoconducto()) {
+                alguienTieneSalvoConducto = true;
             }
 
-            if (tieneSalvoConducto) {
-                todos.get(actual).obtenerSalvoConducto();
+            if (alguienTieneSalvoConducto) {
+                todos.get(actual).obtenerSalvoconducto(this);
                 salirDelMazo();
             }
         }

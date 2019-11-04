@@ -10,7 +10,6 @@ public class Casilla {
     private TituloPropiedad tituloPropiedad;
     private Sorpresa sorpresa;
     private MazoSorpresas mazo;
-    private Tablero casillas;
     
     //Descanso
     Casilla(String nombre) {

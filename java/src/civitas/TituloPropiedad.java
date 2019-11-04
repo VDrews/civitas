@@ -25,6 +25,7 @@ public class TituloPropiedad {
         numHoteles = 0;
         precioCompra = pc;
         precioEdificar = pe;
+        propietario=null;
     }
 
     public String toString() {
@@ -36,16 +37,17 @@ public class TituloPropiedad {
         "\nNúmero de CASAS: " + numCasas +
         "\nNúmero de HOTELES: " + numHoteles +
         "\nPrecio de COMPRA: " + precioCompra +
-        "\nPrecio para EDIFICAR: " + precioEdificar;
+        "\nPrecio para EDIFICAR: " + precioEdificar+
+        "\nPropietario: "+propietario.toString();
     }
 
-    float getPrecioAlquiler() {
+    private float getPrecioAlquiler() {
         if (hipotecado || propietarioEncarcelado()) {
             return 0;
         }
 
         else {
-            return alquilerBase; 
+            return (float) (alquilerBase * (1 + (numCasas * 0.5) + (numHoteles * 2.5)));
         }
     }
 
@@ -170,6 +172,19 @@ public class TituloPropiedad {
 
     float getPrecioEdificar() {
         return precioEdificar;
+    }
+
+    boolean vender(Jugador jugador){
+        if(esEsteElPropietario(jugador)){
+            propietario=null;
+            jugador.recibe(getPrecioVenta());
+            return true;
+        }
+        return false;
+    }
+
+    void actualizaPropietarioPorConversion(Jugador jugador){
+        if(!esEsteElPropietario(jugador)) propietario=jugador;
     }
 
 
