@@ -10,51 +10,51 @@ public class Casilla {
     private TituloPropiedad tituloPropiedad;
     private Sorpresa sorpresa;
     private MazoSorpresas mazo;
-    
-    //Descanso
+
+    // Descanso
     Casilla(String nombre) {
         init();
         tipo = TipoCasilla.DESCANSO;
         this.nombre = nombre;
     }
-    
-    //Calle
+
+    // Calle
     Casilla(TituloPropiedad titulo) {
         init();
         tipo = TipoCasilla.CALLE;
-        tituloPropiedad = titulo;     
+        tituloPropiedad = titulo;
     }
-    
-    //Impuesto
+
+    // Impuesto
     Casilla(float cantidad, String nombre) {
         init();
         tipo = TipoCasilla.IMPUESTO;
         this.nombre = nombre;
         importe = cantidad;
     }
-    
-    //Juez
+
+    // Juez
     Casilla(int numCasillaCarcel, String nombre) {
         init();
         tipo = TipoCasilla.JUEZ;
         carcel = numCasillaCarcel;
         this.nombre = nombre;
     }
-    
-    //Sorpresa
+
+    // Sorpresa
     Casilla(MazoSorpresas mazo, String nombre) {
         init();
         tipo = TipoCasilla.SORPRESA;
         this.mazo = mazo;
         this.nombre = nombre;
-        
+
     }
 
-    public String getNombre(){
+    public String getNombre() {
         return nombre;
     }
 
-    TituloPropiedad getTituloPropiedad(){
+    TituloPropiedad getTituloPropiedad() {
         return tituloPropiedad;
     }
 
@@ -69,7 +69,7 @@ public class Casilla {
             Diario.getInstance().ocurreEvento(todos.get(actual).getNombre() + ": Casilla " + toString());
         }
     }
-    
+
     public boolean jugadorCorrecto(int actual, ArrayList<Jugador> todos) {
         return actual >= 0 && actual < todos.size();
     }
@@ -78,43 +78,42 @@ public class Casilla {
         if (jugadorCorrecto(actual, todos)) {
             informe(actual, todos);
             switch (tipo) {
-                case CALLE:
-                    recibeJugador_calle(actual, todos);                    
-                    break;
+            case CALLE:
+                recibeJugador_calle(actual, todos);
+                break;
 
-                case IMPUESTO:
-                    recibeJugador_impuesto(actual, todos);                    
-                    break;
+            case IMPUESTO:
+                recibeJugador_impuesto(actual, todos);
+                break;
 
-                case JUEZ:
-                    recibeJugador_juez(actual, todos);                    
-                    break;
+            case JUEZ:
+                recibeJugador_juez(actual, todos);
+                break;
 
-                case SORPRESA:
-                    recibeJugador_sorpresa(actual, todos);
-                    break;
+            case SORPRESA:
+                recibeJugador_sorpresa(actual, todos);
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
-    
-    private void recibeJugador_calle(int actual, ArrayList<Jugador> todos){
-        Jugador jugador=todos.get(actual);
-        if(!tituloPropiedad.tienePropietario()){
+
+    private void recibeJugador_calle(int actual, ArrayList<Jugador> todos) {
+        Jugador jugador = todos.get(actual);
+        if (!tituloPropiedad.tienePropietario()) {
             jugador.puedeComprarCasilla();
-        }
-        else{
+        } else {
             tituloPropiedad.tramitarAlquiler(jugador);
         }
     }
 
-    private void recibeJugador_sorpresa(int actual, ArrayList<Jugador> todos){
-        sorpresa=mazo.siguiente();
+    private void recibeJugador_sorpresa(int actual, ArrayList<Jugador> todos) {
+        sorpresa = mazo.siguiente();
         sorpresa.aplicarAJugador(actual, todos);
     }
-    
+
     private void recibeJugador_impuesto(int actual, ArrayList<Jugador> todos) {
         todos.get(actual).pagaImpuesto(importe);
     }

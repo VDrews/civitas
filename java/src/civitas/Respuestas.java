@@ -1,6 +1,5 @@
 package civitas;
 
-public enum Respuestas{
-    NO,
-    SI
+public enum Respuestas {
+    NO, SI
 }

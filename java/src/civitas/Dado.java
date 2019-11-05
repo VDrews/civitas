@@ -2,64 +2,65 @@ package civitas;
 
 import java.util.Random;
 
-public class Dado{
+public class Dado {
     private Random random;
     private int ultimoResultado;
     private boolean debug;
 
-    private static final Dado instance=new Dado();
-    private static int SalidaCarcel=5;
+    private static final Dado instance = new Dado();
+    private static int SalidaCarcel = 5;
 
-    private Dado(){
-        ultimoResultado=0;
-        debug=false;
-        random=new Random();
+    private Dado() {
+        ultimoResultado = 0;
+        debug = false;
+        random = new Random();
     }
 
-    static Dado getInstance() {return instance;}
+    static Dado getInstance() {
+        return instance;
+    }
 
     private int getRandomNumberInRange(int min, int max) {
 
-		if (min >= max) {
-			throw new IllegalArgumentException("max must be greater than min");
-		}
-
-		random = new Random();
-		return random.nextInt((max - min) + 1) + min;
-	}
-
-
-    int tirar(){
-        if (debug){
-            ultimoResultado=1;
-            return 1;
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
         }
-        else{
-            int valor=getRandomNumberInRange(1, 6);
-            ultimoResultado=valor;
+
+        random = new Random();
+        return random.nextInt((max - min) + 1) + min;
+    }
+
+    int tirar() {
+        if (debug) {
+            ultimoResultado = 1;
+            return 1;
+        } else {
+            int valor = getRandomNumberInRange(1, 6);
+            ultimoResultado = valor;
             return valor;
         }
     }
 
-    boolean salgoDeLaCarcel(){
-        return (tirar()>=SalidaCarcel);
+    boolean salgoDeLaCarcel() {
+        return (tirar() >= SalidaCarcel);
     }
 
-    int quienEmpieza (int n){
-        return getRandomNumberInRange(0, n-1);
+    int quienEmpieza(int n) {
+        return getRandomNumberInRange(0, n - 1);
     }
 
-    void setDebug(boolean d){
-        debug=d;
-        String e="Dado--Modo debug: ";
-        if (d) e.concat("activado");
-        else e.concat("desactivado");
+    void setDebug(boolean d) {
+        debug = d;
+        String e = "Dado--Modo debug: ";
+        if (d)
+            e.concat("activado");
+        else
+            e.concat("desactivado");
         Diario.getInstance().ocurreEvento(e);
     }
 
     int getUltimoResultado() {
         return ultimoResultado;
     }
-
 
 }
