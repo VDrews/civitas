@@ -38,22 +38,19 @@ public class CivitasJuego {
 
     private void inicializaTablero(MazoSorpresas mazo) {
         tablero = new Tablero(10);
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 1", 120, 1.1f, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 2", 120, 1.1f, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 3", 120, 1.1f, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 4", 120, 1.1f, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 5", 120, 1.1f, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 6", 120, 1.1f, 20000, 40000, 20000)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 7", 120, 1.1f, 20000, 40000, 20000)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 1", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 2", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 3", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 4", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 5", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 6", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 7", 1.2f, 1.1f, 200, 400, 200)));
         tablero.añadeCasilla(new Casilla(200.5f, "Peaje1")); // Impuesto
         tablero.añadeCasilla(new Casilla(200.5f, "Peaje2")); // Impuesto
         tablero.añadeCasilla(new Casilla(200.5f, "Peaje3")); // Impuesto
         tablero.añadeCasilla(new Casilla("Camping")); // Descanso
         tablero.añadeCasilla(new Casilla("Burger King")); // Descanso
-        tablero.añadeCasilla(new Casilla(10, "Juez")); // Juez
-        tablero.añadeCasilla(new Casilla(10, "Juez")); // Juez
-        tablero.añadeCasilla(new Casilla(10, "Juez")); // Juez
-        tablero.añadeCasilla(new Casilla(10, "Juez")); // Juez
+        tablero.añadeJuez(); // Juez
         tablero.añadeCasilla(new Casilla(mazo, "Sorpresa1")); // Sorpresa
         tablero.añadeCasilla(new Casilla(mazo, "Sorpresa2")); // Sorpresa
         tablero.añadeCasilla(new Casilla(mazo, "Sorpresa3")); // Sorpresa
@@ -105,7 +102,6 @@ public class CivitasJuego {
         return getJugadorActual().construirHotel(ip);
     }
 
-    // TERMINAR
     public String infoJugadorTexto() {
         String s = "Jugador:\n" + jugadores.get(indiceJugadorActual).toString();
         return s;

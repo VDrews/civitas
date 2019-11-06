@@ -22,8 +22,7 @@ class Controlador {
             vista.pausa();
             OperacionesJuego siguiente=juego.siguientePaso();
             vista.mostrarSiguienteOperacion(siguiente);
-
-            
+            if (siguiente!=OperacionesJuego.PASAR_TURNO) vista.mostrarEventos();
 
             if (juego.finalDelJuego())
                 juego.actualizarInfo();
@@ -83,6 +82,7 @@ class Controlador {
                         break;
                 }
 
+                vista.actualizarVista();
             }
         }
     }

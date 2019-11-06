@@ -11,7 +11,7 @@ module Civitas
 
             isFinal = @juego.finalDelJuego()
             while !isFinal
-                @vista.pausa
+                #@vista.pausa
                 siguientePaso = @juego.siguientePaso
                 @vista.mostrarSiguienteOperacion(siguientePaso)
                 

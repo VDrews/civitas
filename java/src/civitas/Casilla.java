@@ -23,6 +23,8 @@ public class Casilla {
         init();
         tipo = TipoCasilla.CALLE;
         tituloPropiedad = titulo;
+        nombre=titulo.getNombre();
+        importe=titulo.getPrecioCompra();
     }
 
     // Impuesto
