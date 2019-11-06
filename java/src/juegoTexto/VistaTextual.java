@@ -80,12 +80,12 @@ class VistaTextual {
     return (Respuestas.values()[opcion]);
   }
 
-  //TERMINAR
   void gestionar() {
-    int opcion = menu("Desea realizar alguna gestion?", new ArrayList<>(Arrays.asList("Vender propiedad",
-        "Hipotecar propiedad", "Cancelar una hipoteca", "Construir casa", "Construir hotel", "Terminar")));
-    iGestion = opcion;
-    // Propiedad jugador actual?
+    ArrayList<String> gestiones = new ArrayList<>(Arrays.asList("Vender propiedad", "Hipotecar propiedad",
+        "Cancelar una hipoteca", "Construir casa", "Construir hotel", "Terminar"));
+    iGestion = menu("Desea realizar alguna gestion?", gestiones);
+    if (iGestion < gestiones.size() - 1)
+      iPropiedad = menu("Sobre qué propiedad?", juegoModel.getJugadorActual().getPropiedades_toString());
 
   }
 
@@ -98,7 +98,7 @@ class VistaTextual {
   }
 
   void mostrarSiguienteOperacion(OperacionesJuego operacion) {
-    System.out.println("Siguiente operación: "+operacion.toString());
+    System.out.println("Siguiente operación: " + operacion.toString());
   }
 
   void mostrarEventos() {

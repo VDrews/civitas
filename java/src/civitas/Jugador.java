@@ -198,7 +198,7 @@ public class Jugador implements Comparable<Jugador> {
         for (int i = 0; i < propiedades.size(); i++) {
             props += propiedades.get(i).getNombre();
         }
-        String s = "Nombre: " + nombre + "Propiedades: " + props + "Casilla actual: " + numCasillaActual;
+        String s = "Nombre: " + nombre + " Saldo: "+saldo+" Propiedades: " + props + " Casilla actual: " + numCasillaActual;
         return s;
     }
 
@@ -258,6 +258,14 @@ public class Jugador implements Comparable<Jugador> {
 
     protected ArrayList<TituloPropiedad> getPropiedades() {
         return propiedades;
+    }
+
+    public ArrayList<String> getPropiedades_toString() {
+        ArrayList<String> res = new ArrayList<String>();
+        for (int i = 0; i < propiedades.size(); i++) {
+            res.add(propiedades.get(i).getNombre());
+        }
+        return res;
     }
 
     boolean comprar(TituloPropiedad titulo) {

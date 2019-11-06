@@ -19,7 +19,7 @@ public class CivitasJuego {
         }
 
         gestorEstados = new GestorEstados();
-        gestorEstados.estadoInicial();
+        estado=gestorEstados.estadoInicial();
         indiceJugadorActual = Dado.getInstance().quienEmpieza(nombres.size());
         mazo = new MazoSorpresas();
         tablero = new Tablero(10);

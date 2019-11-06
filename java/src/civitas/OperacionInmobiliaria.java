@@ -1,6 +1,6 @@
 package civitas;
 
-class OperacionInmobiliaria {
+public class OperacionInmobiliaria {
     private int numPropiedad;
     private GestionesInmobiliarias gestion;
 

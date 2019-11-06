@@ -45,6 +45,7 @@ public class MazoSorpresas {
         usadas++;
         ultimaSorpresa = sorpresas.get(0);
         sorpresas.remove(0);
+        sorpresas.add(ultimaSorpresa);
 
         return ultimaSorpresa;
     }
