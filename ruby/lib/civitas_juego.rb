@@ -19,17 +19,16 @@ module Civitas
             
 
             @gestorEstados = GestorEstados.new
-            @gestorEstados.estadoInicial
+            @estado = @gestorEstados.estadoInicial
 
             @indiceJugadorActual = Dado.instance.quienEmpieza(nombres.size)
             
-            @mazo
+            @mazo = MazoSorpresas.new
+            
+            
+            inicializaTablero(@mazo)
             inicializaMazoSorpresas(@tablero)
 
-            @tablero
-            inicializaTablero(@mazo)
-
-            @estado = EstadosJuego::INICIO_TURNO
         end
 
         def toString
@@ -37,8 +36,6 @@ module Civitas
             string+=" Estado: "+@estado.to_s
             string+=" Mazo: "+@mazo.toString
             string+=" Tablero: "+@tablero.toString
-
-            #Ver toString de las demás clases
 
             return string
         end
@@ -56,36 +53,45 @@ module Civitas
             @tablero = Tablero.new(10)
 
             @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 1", 120, 1.1, 20000, 40000, 20000)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 2", 120, 1.1, 20000, 40000, 20000)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 3", 120, 1.1, 20000, 40000, 20000)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 4", 120, 1.1, 20000, 40000, 20000)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 5", 120, 1.1, 20000, 40000, 20000)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 6", 120, 1.1, 20000, 40000, 20000)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 7", 120, 1.1, 20000, 40000, 20000)))
             @tablero.añadeCasilla(Casilla.newImpuesto(200.5, "Peaje1"))
-            @tablero.añadeCasilla(Casilla.newImpuesto(200.5, "Peaje2")) 
-            @tablero.añadeCasilla(Casilla.newImpuesto(200.5, "Peaje3")) 
+            @tablero.añadeCasilla(Casilla.newSorpresa(@mazo, "Sorpresa1")) 
+            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 2", 120, 1.1, 20000, 40000, 20000)))
+            @tablero.añadeCasilla(Casilla.newSorpresa(@mazo, "Sorpresa2")) 
             @tablero.añadeCasilla(Casilla.newDescanso("Camping")) 
+            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 3", 120, 1.1, 20000, 40000, 20000)))
             @tablero.añadeCasilla(Casilla.newDescanso("Burger King")) 
-            @tablero.añadeJuez 
-            @tablero.añadeCasilla(Casilla.newSorpresa(mazo, "Sorpresa1")) 
-            @tablero.añadeCasilla(Casilla.newSorpresa(mazo, "Sorpresa2")) 
-            @tablero.añadeCasilla(Casilla.newSorpresa(mazo, "Sorpresa3")) 
-            @tablero.añadeCasilla(Casilla.newSorpresa(mazo, "Sorpresa4")) 
-            @tablero.añadeCasilla(Casilla.newSorpresa(mazo, "Sorpresa5")) 
+            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 4", 120, 1.1, 20000, 40000, 20000)))
+            @tablero.añadeCasilla(Casilla.newImpuesto(200.5, "Peaje2")) 
+            @tablero.añadeCasilla(Casilla.newSorpresa(@mazo, "Sorpresa3")) 
+            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 5", 120, 1.1, 20000, 40000, 20000)))
+            @tablero.añadeCasilla(Casilla.newImpuesto(200.5, "Peaje3")) 
+            @tablero.añadeJuez
+            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 6", 120, 1.1, 20000, 40000, 20000)))
+            @tablero.añadeCasilla(Casilla.newSorpresa(@mazo, "Sorpresa4")) 
+            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Calle 7", 120, 1.1, 20000, 40000, 20000)))
+            @tablero.añadeCasilla(Casilla.newSorpresa(@mazo, "Sorpresa5")) 
         end
         
         def inicializaMazoSorpresas(tablero)
-            @mazo = MazoSorpresas.new
 
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::IRCARCEL, tablero:tablero))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::SALIRCARCEL, tablero:tablero))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::IRCASILLA, tablero:tablero, valor:3, texto:"Ir a casilla"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::IRCASILLA, tablero:tablero, valor:6, texto:"Ir a casilla"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::IRCASILLA, tablero:tablero, valor:10, texto:"Ir a casilla"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PORCASAHOTEL, tablero:tablero, valor:10, texto:"Casa o hotel"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PORJUGADOR, tablero:tablero, valor:10, texto:"Jugador"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PAGARCOBRAR, tablero:tablero, valor:10, texto:"Pagar cobrar"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::IRCARCEL, tablero:@tablero))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::SALIRCARCEL, tablero:@tablero))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:3, texto:"Ir a casilla"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:6, texto:"Ir a casilla"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:10, texto:"Ir a casilla"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::PORCASAHOTEL, tablero:@tablero, valor:10, texto:"Casa o hotel"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::PORJUGADOR, tablero:@tablero, valor:10, texto:"Jugador"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::PAGARCOBRAR, tablero:@tablero, valor:10, texto:"Pagar cobrar"))
+
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::SALIRCARCEL, tablero:@tablero))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:3, texto:"Ir a casilla"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:6, texto:"Ir a casilla"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:10, texto:"Ir a casilla"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::PORCASAHOTEL, tablero:@tablero, valor:10, texto:"Casa o hotel"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::PORJUGADOR, tablero:@tablero, valor:10, texto:"Jugador"))
+            @mazo.alMazo(Sorpresa.new(mazo: @mazo, tipo:TipoSorpresa::PAGARCOBRAR, tablero:@tablero, valor:10, texto:"Pagar cobrar"))
+        
+            puts @mazo.toString
         end
 
         public
@@ -115,6 +121,8 @@ module Civitas
                siguientePasoCompletado(operacion)  
             end
 
+            puts "Operacion: #{operacion}"
+
             return operacion
 
         end
@@ -142,11 +150,13 @@ module Civitas
 
             posicionNueva = @tablero.nuevaPosicion(posicionActual, tirada)
 
+            puts "posicionNueva: #{posicionNueva}"
             casilla = @tablero.getCasilla(posicionNueva)
 
             contabilizarPasosPorSalida(jugadorActual)
 
             jugadorActual.moverACasilla(posicionNueva)
+
 
             casilla.recibeJugador(@indiceJugadorActual, @jugadores)
             
@@ -155,7 +165,7 @@ module Civitas
 
         def infoJugadorTexto
             jugadorActual = @jugadores[@indiceJugadorActual]
-            puts "Jugador: #[jugadorActual.toString]"
+            puts "Jugador: #{jugadorActual.toString}"
         end
 
         def cancelarHipoteca(ip)
@@ -192,11 +202,11 @@ module Civitas
         end
 
         def salirCarcelPagando
-            @jugadores[@indiceJugadorActual].salirCarcelPagando(ip)
+            @jugadores[@indiceJugadorActual].salirCarcelPagando
         end
 
         def salirCarcelTirando
-            @jugadores[@indiceJugadorActual].salirCarcelTirando(ip)
+            @jugadores[@indiceJugadorActual].salirCarcelTirando
         end
 
         def ranking

@@ -1,3 +1,5 @@
+require_relative("mazo_sorpresas")
+require_relative("tipo_sorpresa")
 module Civitas
     class Sorpresa
 
@@ -10,27 +12,18 @@ module Civitas
         end
 
         def aplicarAJugador(actual, todos)
-            if(@tipo=IRCARCEL)
+            case @tipo
+            when TipoSorpresa::IRCARCEL
                 aplicarAJugador_irCarcel(actual, todos)
-            end
-
-            if(@tipo=IRCASILLA)
+            when TipoSorpresa::IRCASILLA
                 aplicarAJugador_irACasilla(actual, todos)
-            end
-
-            if(@tipo=PAGARCOBRAR)
+            when TipoSorpresa::PAGARCOBRAR
                 aplicarAJugador_pagarCobrar(actual, todos)
-            end
-
-            if(@tipo=SALIRCARCEL)
+            when TipoSorpresa::SALIRCARCEL
                 aplicarAJugador_salirCarcel(actual, todos)
-            end
-
-            if(@tipo=PORCASAHOTEL)
+            when TipoSorpresa::PORCASAHOTEL
                 aplicarAJugador_porCasaHotel(actual, todos)
-            end
-
-            if(@tipo=PORJUGADOR)
+            when TipoSorpresa::PORJUGADOR
                 aplicarAJugador_porJugador(actual, todos)
             end
             
@@ -40,10 +33,13 @@ module Civitas
         def aplicarAJugador_irACasilla(actual, todos)
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
-                tirada=Tablero::calcularTirada(todos[actual].casillaActual, @valor)
-                nueva_pos=Tablero::nuevaPosicion(todos[actual].casillaActual, tirada)
+                puts "CASILLAACTUAL: #{todos[actual].getNumCasillaActual}"
+                puts "VALOR: #{@valor}"
+                tirada = @tablero.calcularTirada(todos[actual].getNumCasillaActual, @valor)
+                nueva_pos = @tablero.nuevaPosicion(todos[actual].getNumCasillaActual, tirada)
                 todos[actual].moverACasilla(nueva_pos)
-                Casilla::recibeJugador(actual, todos)
+                puts "NUEVA POS: #{nueva_pos}"
+                @tablero.getCasilla(nueva_pos).recibeJugador(actual, todos)
             end
 
         end
@@ -51,7 +47,7 @@ module Civitas
         def aplicarAJugador_irCarcel(actual, todos)
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
-                todos[actual].encarcelar
+                todos[actual].encarcelar(@tablero.getCarcel) # Arreglar esto
             end
         end
 
@@ -65,21 +61,21 @@ module Civitas
         def aplicarAJugador_porCasaHotel(actual, todos)
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
-                todos[actual].modificarSaldo(@valor*todos[actual].numCasasHoteles)
+                todos[actual].modificarSaldo(@valor*todos[actual].cantidadCasasHoteles)
             end
         end
 
         def aplicarAJugador_porJugador(actual, todos)
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
-                sorpresa=new(tipo:PAGARCOBRAR, valor:@valor*-1)
-                for i in todos do
+                sorpresa= Sorpresa.new(tipo:TipoSorpresa::PAGARCOBRAR, valor:@valor*-1)
+                for i in 0...todos.size do
                     if i!=actual
                         sorpresa.aplicarAJugador(i, todos)
                     end
                 end
 
-                sorpresa=new(tipo:PAGARCOBRAR, valor:@valor*(todos.length-1))
+                sorpresa= Sorpresa.new(tipo:TipoSorpresa::PAGARCOBRAR, valor:@valor*(todos.length-1))
                 sorpresa.aplicarAJugador(actual, todos)
             end
         end
@@ -88,7 +84,7 @@ module Civitas
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
                 tiene=false
-                for i in todos do
+                for i in 0...todos.size do
                     tiene=todos[i].tieneSalvoConducto
                     if tiene
                         break
@@ -102,17 +98,17 @@ module Civitas
         end
 
         def informe(actual, todos)
-            Diario.instance.ocurre_evento("Se aplica sorpresa " + @tipo + " a "+ todos[actual])
+            Diario.instance.ocurreEvento("Se aplica sorpresa " + @tipo.to_s + " a "+ todos[actual].nombre)
         end
 
         public
         def jugadorCorrecto (actual, todos)
-            return (actual>=0&&actual<=todos.length)
+            return (actual >= 0 && actual <= todos.length)
         end
 
         def salirDelMazo
-            if (@tipo=SALIRCARCEL)
-                MazoSorpresas::inhabilitarCartaEspecial(self)
+            if (@tipo == TipoSorpresa::SALIRCARCEL)
+                @mazo.inhabilitarCartaEspecial(self)
             end
         end
 
@@ -121,8 +117,8 @@ module Civitas
         end
 
         def usada
-            if (@tipo=SALIRCARCEL)
-                MazoSorpresas::habilitarCartaEspecial(self)
+            if (@tipo == TipoSorpresa::SALIRCARCEL)
+                @mazo.habilitarCartaEspecial(self)
             end
         end
 

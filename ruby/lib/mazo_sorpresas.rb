@@ -20,16 +20,14 @@ module Civitas
             string=" Barajada "+@barajada.to_s
             string+=" Usadas "+@usadas.to_s
             string+=" Debug: "+@debug.to_s
+            string+=" Tamaño: "+@sorpresas.size.to_s
             #La salida de lo comentado no es ortodoxa. Activar si realmente necesario
             return string
         end
 
-
-
-
         def alMazo(s)
             if (!@barajada)
-                @sorpresas.push(s)
+                @sorpresas << s
             end
         end
 
@@ -41,9 +39,11 @@ module Civitas
                 @usadas=0
                 @barajada=true
             end
-            usadas+=1
+            @usadas+=1
             @ultimaSorpresa=@sorpresas[0]
-            @sorpresas.delete_at(0)
+            # @sorpresas.delete_at(0)
+
+            # PETA PORQUE SE QUEDA SIN CARTAS
             
             return @ultimaSorpresa    
         end
@@ -59,8 +59,8 @@ module Civitas
         def inhabilitarCartaEspecial(sorpresa) #Sorpresa
             # Sorpresa es un objeto, no se si al pedir el indice lo encontrará unicamente poniendo el objeto
             index = @sorpresas.index(sorpresa)
-            param = @sorpresas[index]
             if(index!=nil)
+                param = @sorpresas[index]
                 @sorpresas.delete_at(index)
                 @cartasEspeciales.push(param)
                 Diario.instance.ocurreEvento("Se ha inhabilitado la carta nº" + index + "al mazo de cartas")
@@ -69,8 +69,8 @@ module Civitas
 
         def habilitarCartaEspecial(sorpresa)
             index = @cartasEspeciales.index(sorpresa)
-            param = @cartasEspeciales[index]
             if(index!=nil)
+                param = @cartasEspeciales[index]
                 @cartasEspeciales.delete_at(index)
                 @sorpresas.push(param)
                 Diario.instance.ocurreEvento("Se ha habilitado la carta nº" + index + "al mazo de cartas")

@@ -6,43 +6,53 @@ module Civitas
         end
 
         def juega #void
-            @vista.setCivitasJuego(@juego)
-            @vista.pausa
-            siguientePaso = @vista.mostrarSiguienteOperacion(@juego.siguientePaso)
             
-            if (siguientePaso != "PASAR_TURNO")
-                @vista.mostrarEventos
-            end
+            @vista.setCivitasJuego(@juego)
 
             isFinal = @juego.finalDelJuego()
-
-            if (!isFinal)
-                case siguientePaso
-                when "COMPRAR"
-                    if (vista.comprar == RESPUESTAS::SI)
-                        juego.comprar
-                        juego.siguientePasoCompletado(OperacionesJuego::COMPRAR)
-                    end
-                when "GESTIONAR"
-                    vista.gestionar
-                    operacionInmobiliaria = OperacionInmobiliaria.new(vista.getGestion, vista.getPropiedad)
-                    juego.siguientePasoCompletado(OperacionesJuego::GESTIONAR)
-
-                when "TERMINAR"
-                    juego.siguientePasoCompletado(OperacionesJuego::TERMINAR)
-
-                when "SALIR_CARCEL"
-                    if (vista.salirCarcel == SalidasCarcel::PAGANDO)
-                        juego.salirCarcelPagando()
-                    else
-                        juego.salirCarcelTirando()
-                    end
-                    juego.siguientePasoCompletado(OperacionesJuego::SALIR_CARCEL)
-                    
+            while !isFinal
+                @vista.pausa
+                siguientePaso = @juego.siguientePaso
+                @vista.mostrarSiguienteOperacion(siguientePaso)
+                
+                
+                if (siguientePaso != "PASAR_TURNO")
+                    @vista.mostrarEventos
                 end
-            else
-                juego.ranking
-            end            
+                
+                isFinal = @juego.finalDelJuego()
+
+                if (!isFinal)
+                    puts siguientePaso.inspect
+
+                    case siguientePaso
+                    when Operaciones_juego::COMPRAR
+                        if (@vista.comprar == Respuestas::SI)
+                            @juego.comprar
+                            @juego.siguientePasoCompletado(Operaciones_juego::COMPRAR)
+                        end
+                    when Operaciones_juego::GESTIONAR
+                        @vista.gestionar
+                        operacionInmobiliaria = OperacionInmobiliaria.new(@vista.getGestion, @vista.getPropiedad)
+                        @juego.siguientePasoCompletado(Operaciones_juego::GESTIONAR)
+
+                        if @vista.getGestion == 6
+                            @juego.siguientePasoCompletado(Operaciones_juego::TERMINAR)
+                        end
+
+                    when Operaciones_juego::SALIR_CARCEL
+                        if (@vista.salirCarcel == SalidasCarcel::PAGANDO)
+                            @juego.salirCarcelPagando()
+                        else
+                            @juego.salirCarcelTirando()
+                        end
+                        @juego.siguientePasoCompletado(Operaciones_juego::SALIR_CARCEL)
+                        
+                    else
+                        puts "No esta entrando por ningún lao" 
+                    end
+                end     
+            end       
         end
     end
 end

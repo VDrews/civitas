@@ -1,5 +1,5 @@
 module Civitas  
-  module Respuestas
+  module SalidasCarcel
     PAGANDO = :pagando
     TIRANDO =:tirando
     

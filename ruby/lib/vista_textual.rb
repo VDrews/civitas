@@ -1,5 +1,6 @@
 #encoding:utf-8
 require_relative 'operaciones_juego'
+require_relative 'salidas_carcel'
 require 'io/console'
 
 module Civitas
@@ -21,7 +22,7 @@ module Civitas
     
     def pausa
       print "Pulsa una tecla"
-      STDIN.getch
+      gets
       print "\n"
     end
 
@@ -78,8 +79,8 @@ module Civitas
     end
 
     def gestionar
-      lista_Respuestas = [GestionesInmobiliarias::VENDER, GestionesInmobiliarias::HIPOTECAR, GestionesInmobiliarias::CANCELAR_HIPOTECA, GestionesInmobiliarias::CONSTRUIR_CASA, GestionesInmobiliarias::CONSTRUIR_HOTEL, GestionesInmobiliarias::TERMINAR]
-      return lista_Respuestas[menu("Número de gestión de inmobiliaria", ["VENDER", "HIPOTECAR", "CANCELAR_HIPOTECA", "CONSTRUIR_CASA", "CONSTRUIR_CASA", "CONSTRUIR_HOTEL", "TERMINAR"])]
+      @iGestion = menu("Número de gestión de inmobiliaria", ["VENDER", "HIPOTECAR", "CANCELAR_HIPOTECA", "CONSTRUIR_CASA", "CONSTRUIR_CASA", "CONSTRUIR_HOTEL", "TERMINAR"])
+      @iPropiedad = menu("Número de la propiedad", @juego.getJugadorActual.propiedades)
     end
 
     def getGestion
@@ -102,8 +103,8 @@ module Civitas
         puts "COMPRAR"
       when Operaciones_juego::GESTIONAR
         puts "GESTIONAR"
-
       end
+
     end
 
     def mostrarEventos

@@ -59,7 +59,9 @@ module Civitas
         end
 
         def nuevaPosicion(actual, tirada)
-            if (correcto(actual + tirada)) 
+            puts "ACTUAL: #{actual}"
+            puts "TIRADA: #{tirada}"
+            if (correcto) 
                 return (actual + tirada) % @casillas.length
             end
             
@@ -70,7 +72,7 @@ module Civitas
             tirada = destino - origen
 
             if (tirada < 0)
-                tirada += casillas.length
+                tirada += @casillas.length
             end
 
             return tirada

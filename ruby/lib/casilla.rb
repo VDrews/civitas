@@ -33,8 +33,9 @@ module Civitas
         end
 
         def self.newJuez(numCasillaCarcel, nombre)
-            new(nil, nombre, TipoCasilla::JUEZ, nil, nil, nil)
             @@carcel=numCasillaCarcel
+            new(nil, nombre, TipoCasilla::JUEZ, nil, nil, nil)
+            
         end
 
         def self.newSorpresa(mazo, nombre)
@@ -48,7 +49,7 @@ module Civitas
         end
 
         def toString
-            return "Casilla: " + @nombre.to_s + "\nCarcel: " + @carcel.to_s + "\nImporte: " + @importe.to_s
+            return "\nCasilla: " + @nombre.to_s + "\nCarcel: " + @@carcel.to_s + "\nImporte: " + @importe.to_s
         end
 
         def jugadorCorrecto(actual, todos)
@@ -72,7 +73,7 @@ module Civitas
 
         private
         def recibeJugador_impuesto(actual, todos)
-            todos[actual].pagaImpuesto(importe);
+            todos[actual].pagaImpuesto(@importe);
         end
 
         def recibeJugador_calle(actual, todos)
@@ -89,14 +90,19 @@ module Civitas
         end
 
         def recibeJugador_juez(actual, todos)
-            todos[actual].encarcelar
+            todos[actual].encarcelar(@@carcel)
         end
 
         def recibeJugador_sorpresa(actual, todos)
             if jugadorCorrecto(actual, todos)
-                sorpresa = mazo.siguiente
+                @sorpresa = @mazo.siguiente
+                if(@sorpresa == nil)
+                    puts "ERROR"
+                end
+                puts "MAAAAAAAAAAAAAAAAAAAAAAAZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
+                puts @mazo.toString
                 informe(actual, todos)
-                sorpresa.aplicarAJugador(actual, todos)
+                @sorpresa.aplicarAJugador(actual, todos)
             end
 
         end
