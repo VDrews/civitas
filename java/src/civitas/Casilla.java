@@ -62,7 +62,6 @@ public class Casilla {
 
     private void init() {
         nombre = "";
-        carcel = 0;
         importe = 0;
     }
 

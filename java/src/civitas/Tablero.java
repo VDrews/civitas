@@ -15,7 +15,7 @@ public class Tablero {
         else
             numCasillaCarcel = 1;
 
-        casillas = new ArrayList<Casilla>(0);
+        casillas = new ArrayList<Casilla>();
         Casilla s = new Casilla("Salida");
         casillas.add(s);
 
@@ -58,7 +58,7 @@ public class Tablero {
 
     void añadeJuez() {
         if (!tieneJuez) {
-            casillas.add(new Casilla("Juez"));
+            casillas.add(new Casilla(numCasillaCarcel, "Juez"));
             tieneJuez = true;
         }
     }

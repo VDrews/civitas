@@ -22,7 +22,6 @@ public class CivitasJuego {
         estado=gestorEstados.estadoInicial();
         indiceJugadorActual = Dado.getInstance().quienEmpieza(nombres.size());
         mazo = new MazoSorpresas();
-        tablero = new Tablero(10);
         inicializaTablero(mazo);
         inicializaMazoSopresas(tablero);
 
@@ -60,7 +59,6 @@ public class CivitasJuego {
     }
 
     private void inicializaMazoSopresas(Tablero tablero) {
-        mazo = new MazoSorpresas();
 
         mazo.alMazo(new Sorpresa(TipoSorpresa.IRCARCEL, tablero));
         mazo.alMazo(new Sorpresa(TipoSorpresa.SALIRCARCEL, tablero));

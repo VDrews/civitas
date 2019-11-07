@@ -9,13 +9,13 @@ public class ProgramaPrincipal{
         ArrayList<String> nombres=new ArrayList<String>();
         nombres.add("Andrés");
         nombres.add("Carlos");
-        nombres.add("Chema");
-        nombres.add("Esmeralda");
+        // nombres.add("Chema");
+        // nombres.add("Esmeralda");
 
         CivitasJuego juego=new CivitasJuego(nombres);
         VistaTextual vista=new VistaTextual();
         Controlador controlador=new Controlador(juego, vista);
-        //Dado.getInstance().setDebug(true);
+        Dado.getInstance().setDebug(true);
 
         controlador.juega();
     }

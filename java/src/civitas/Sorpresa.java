@@ -13,6 +13,7 @@ public class Sorpresa {
         init();
         this.tipo = tipo;
         this.tablero = tablero;
+        valor=tablero.getCarcel();
 
         if (tipo == TipoSorpresa.IRCARCEL) {
             texto = "Carcel";
