@@ -1,4 +1,3 @@
-
 package civitas;
 
 import java.util.ArrayList;
@@ -42,10 +41,10 @@ public class Tablero {
 
     int getPorSalida() {
         if (porSalida > 0) {
-            porSalida++;
-            return (porSalida - 1);
-        } else
-            return porSalida;
+            porSalida--;
+            return (porSalida + 1);
+        } 
+        else return porSalida;
     }
 
     void añadeCasilla(Casilla casilla) {
@@ -73,13 +72,16 @@ public class Tablero {
     int nuevaPosicion(int actual, int tirada) {
         if (!correcto())
             return -1;
-        else
-            return (actual + tirada) % casillas.size();
+        else{
+            int posicion=(actual + tirada) % casillas.size();
+            if (posicion!=(actual+tirada)) porSalida++;
+            return posicion;
+        }
     }
 
     int calcularTirada(int origen, int destino) {
         int resultado = destino - origen;
-        if (resultado <= 0)
+        if (resultado < 0)
             resultado += casillas.size();
         return resultado;
     }

@@ -196,7 +196,7 @@ public class Jugador implements Comparable<Jugador> {
     public String toString() {
         String props = "";
         for (int i = 0; i < propiedades.size(); i++) {
-            props += propiedades.get(i).getNombre();
+            props += propiedades.get(i).getNombre()+" ";
         }
         String s = "Nombre: " + nombre + " Saldo: "+saldo+" Propiedades: " + props + " Casilla actual: " + numCasillaActual;
         return s;

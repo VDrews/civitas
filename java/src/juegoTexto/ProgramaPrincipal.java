@@ -15,7 +15,7 @@ public class ProgramaPrincipal{
         CivitasJuego juego=new CivitasJuego(nombres);
         VistaTextual vista=new VistaTextual();
         Controlador controlador=new Controlador(juego, vista);
-        Dado.getInstance().setDebug(true);
+        //Dado.getInstance().setDebug(true);
 
         controlador.juega();
     }
