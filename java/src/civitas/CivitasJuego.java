@@ -36,38 +36,41 @@ public class CivitasJuego {
     }
 
     private void inicializaTablero(MazoSorpresas mazo) {
-        tablero = new Tablero(10);
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 1", 1.2f, 1.1f, 200, 400, 200)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 2", 1.2f, 1.1f, 200, 400, 200)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 3", 1.2f, 1.1f, 200, 400, 200)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 4", 1.2f, 1.1f, 200, 400, 200)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 5", 1.2f, 1.1f, 200, 400, 200)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 6", 1.2f, 1.1f, 200, 400, 200)));
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 7", 1.2f, 1.1f, 200, 400, 200)));
-        tablero.añadeCasilla(new Casilla(200.5f, "Peaje1")); // Impuesto
-        tablero.añadeCasilla(new Casilla(200.5f, "Peaje2")); // Impuesto
-        tablero.añadeCasilla(new Casilla(200.5f, "Peaje3")); // Impuesto
-        tablero.añadeCasilla(new Casilla("Camping")); // Descanso
-        tablero.añadeCasilla(new Casilla("Burger King")); // Descanso
+        tablero = new Tablero(4);
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 1.1", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(mazo, "Suerte")); // Sorpresa
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 1.2", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 2.1", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 2.2", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(mazo, "Suerte")); // Sorpresa
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 2.3", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla("Parking")); // Descanso
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 3.1", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 3.2", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(mazo, "Suerte")); // Sorpresa
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 3.3", 1.2f, 1.1f, 200, 400, 200)));
         tablero.añadeJuez(); // Juez
-        tablero.añadeCasilla(new Casilla(mazo, "Sorpresa1")); // Sorpresa
-        tablero.añadeCasilla(new Casilla(mazo, "Sorpresa2")); // Sorpresa
-        tablero.añadeCasilla(new Casilla(mazo, "Sorpresa3")); // Sorpresa
-        tablero.añadeCasilla(new Casilla(mazo, "Sorpresa4")); // Sorpresa
-        tablero.añadeCasilla(new Casilla(mazo, "Sorpresa5")); // Sorpresa
-
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 4.1", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 4.2", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(200.5f, "Hacienda somos todos")); // Impuesto
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 5.1", 1.2f, 1.1f, 200, 400, 200)));
+        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Calle 5.2", 1.2f, 1.1f, 200, 400, 200)));
+        
     }
 
     private void inicializaMazoSopresas(Tablero tablero) {
 
         mazo.alMazo(new Sorpresa(TipoSorpresa.IRCARCEL, tablero));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.SALIRCARCEL, tablero));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.SALIRCARCEL, mazo));
         mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, tablero, 3, "Ir a casilla"));
         mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, tablero, 6, "Ir a casilla"));
         mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, tablero, 10, "Ir a casilla"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, tablero, 10, "Casa o hotel"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, tablero, 10, "Jugador"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, tablero, 10, "Pagar cobrar"));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, tablero, 50, "Pagar cobrar"));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, tablero, -70, "Pagar cobrar"));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, tablero, 10, "Jugador"));  
+        mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, tablero, -10, "Jugador"));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, tablero, 25, "Casa o hotel"));
+        mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, tablero, -20, "Casa o hotel"));
     }
 
     private void contabilizarPasosPorSalida(Jugador jugadorActual) {

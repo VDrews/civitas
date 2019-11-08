@@ -68,6 +68,8 @@ public class Jugador implements Comparable<Jugador> {
 
         else {
             salvoconducto = s;
+            Diario.getInstance().ocurreEvento("El jugador " + nombre + " obtiene salvoconducto");
+
             return true;
         }
     }
@@ -196,9 +198,10 @@ public class Jugador implements Comparable<Jugador> {
     public String toString() {
         String props = "";
         for (int i = 0; i < propiedades.size(); i++) {
-            props += propiedades.get(i).getNombre()+" ";
+            props += propiedades.get(i).getNombre() + " ";
         }
-        String s = "Nombre: " + nombre + " Saldo: "+saldo+" Propiedades: " + props + " Casilla actual: " + numCasillaActual;
+        String s = "Nombre: " + nombre + " Saldo: " + saldo + " Propiedades: " + props + " Casilla actual: "
+                + numCasillaActual;
         return s;
     }
 
@@ -297,8 +300,8 @@ public class Jugador implements Comparable<Jugador> {
                 result = propiedad.construirHotel(this);
                 int casasPorHotel = getCasasPorHotel();
                 propiedad.destruirCasas(casasPorHotel, this);
+                Diario.getInstance().ocurreEvento("El jugador " + nombre + " ha construido un hotel en " + ip);
             }
-            Diario.getInstance().ocurreEvento("El jugador " + nombre + " ha construido un hotel en " + ip);
         }
         return result;
     }
@@ -313,8 +316,8 @@ public class Jugador implements Comparable<Jugador> {
 
             if (puedoEdificarCasa) {
                 result = propiedad.construirCasa(this);
+                Diario.getInstance().ocurreEvento("El jugador " + nombre + " ha construido una casa en " + ip);
             }
-            Diario.getInstance().ocurreEvento("El jugador " + nombre + " ha construido una casa en " + ip);
         }
         return result;
     }

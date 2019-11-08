@@ -43,8 +43,8 @@ public class Tablero {
         if (porSalida > 0) {
             porSalida--;
             return (porSalida + 1);
-        } 
-        else return porSalida;
+        } else
+            return porSalida;
     }
 
     void añadeCasilla(Casilla casilla) {
@@ -72,9 +72,10 @@ public class Tablero {
     int nuevaPosicion(int actual, int tirada) {
         if (!correcto())
             return -1;
-        else{
-            int posicion=(actual + tirada) % casillas.size();
-            if (posicion!=(actual+tirada)) porSalida++;
+        else {
+            int posicion = (actual + tirada) % casillas.size();
+            if (posicion != (actual + tirada))
+                porSalida++;
             return posicion;
         }
     }

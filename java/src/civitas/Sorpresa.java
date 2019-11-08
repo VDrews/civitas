@@ -13,13 +13,8 @@ public class Sorpresa {
         init();
         this.tipo = tipo;
         this.tablero = tablero;
-        valor=tablero.getCarcel();
-
-        if (tipo == TipoSorpresa.IRCARCEL) {
-            texto = "Carcel";
-        } else if (tipo == TipoSorpresa.SALIRCARCEL) {
-            texto = "Salir de la carcel";
-        }
+        valor = tablero.getCarcel();
+        texto = "Carcel";
     }
 
     Sorpresa(TipoSorpresa tipo, Tablero tablero, int valor, String texto) {
@@ -41,6 +36,7 @@ public class Sorpresa {
         init();
         this.tipo = tipo;
         this.mazo = mazo;
+        texto = "Salir de la cárcel";
     }
 
     private void init() {
@@ -122,7 +118,7 @@ public class Sorpresa {
                 alguienTieneSalvoConducto = true;
             }
 
-            if (alguienTieneSalvoConducto) {
+            if (!alguienTieneSalvoConducto) {
                 todos.get(actual).obtenerSalvoconducto(this);
                 salirDelMazo();
             }

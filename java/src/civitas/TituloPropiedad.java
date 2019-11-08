@@ -45,8 +45,12 @@ public class TituloPropiedad {
         }
     }
 
+    private float getImporteHipoteca() {
+        return hipotecaBase * (1 + (numCasas * 0.5f) + (numHoteles * 2.5f));
+    }
+
     float getImporteCancelarHipoteca() {
-        return hipotecaBase * factorInteresesHipoteca;
+        return getImporteHipoteca() * factorInteresesHipoteca;
     }
 
     boolean cancelarHipoteca(Jugador jugador) {
@@ -63,7 +67,7 @@ public class TituloPropiedad {
 
     boolean hipotecar(Jugador jugador) {
         if (!hipotecado && esEsteElPropietario(jugador)) {
-            jugador.recibe(hipotecaBase);
+            jugador.recibe(getImporteHipoteca());
             hipotecado = true;
             return true;
         } else {
