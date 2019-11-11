@@ -279,9 +279,10 @@ public class Jugador implements Comparable<Jugador> {
             float precio = titulo.getPrecioCompra();
             if (puedoGastar(precio)) {
                 result = titulo.comprar(this);
-                if (result)
+                if (result){
                     propiedades.add(titulo);
-                Diario.getInstance().ocurreEvento("El jugador " + nombre + " compra la propiedad " + titulo.toString());
+                    Diario.getInstance().ocurreEvento("El jugador " + nombre + " compra la propiedad " + titulo.toString());
+                }
             }
             puedeComprar = false;
         }
@@ -292,7 +293,7 @@ public class Jugador implements Comparable<Jugador> {
         boolean result = false;
         if (encarcelado)
             return result;
-        if (!encarcelado) {
+        if (existeLaPropiedad(ip)) {
             TituloPropiedad propiedad = propiedades.get(ip);
             boolean puedoEdificarHotel = puedoEdificarHotel(propiedad);
 
@@ -310,7 +311,7 @@ public class Jugador implements Comparable<Jugador> {
         boolean result = false;
         if (encarcelado)
             return result;
-        if (!encarcelado) {
+        if (existeLaPropiedad(ip)) {
             TituloPropiedad propiedad = propiedades.get(ip);
             boolean puedoEdificarCasa = puedoEdificarCasa(propiedad);
 
