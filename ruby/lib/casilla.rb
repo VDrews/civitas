@@ -21,7 +21,7 @@ module Civitas
         attr_reader :nombre, :tituloPropiedad
 
         def self.newDescanso(nombre)
-            new(nil, nombre, TipoCasilla::DESCANSO, nil, nil, nil)
+            new(0, nombre, TipoCasilla::DESCANSO, nil, nil, nil)
         end
 
         def self.newCalle(titulo)
@@ -34,12 +34,12 @@ module Civitas
 
         def self.newJuez(numCasillaCarcel, nombre)
             @@carcel=numCasillaCarcel
-            new(nil, nombre, TipoCasilla::JUEZ, nil, nil, nil)
+            new(0, nombre, TipoCasilla::JUEZ, nil, nil, nil)
             
         end
 
         def self.newSorpresa(mazo, nombre)
-            new(nil, nombre, TipoCasilla::SORPRESA, nil, mazo, nil)
+            new(0, nombre, TipoCasilla::SORPRESA, nil, mazo, nil)
         end
 
         def informe(actual, todos)
@@ -57,55 +57,45 @@ module Civitas
         end
 
         def recibeJugador(actual, todos)
-            case @tipo
-            when TipoCasilla::CALLE
-                recibeJugador_calle(actual, todos)
-            when TipoCasilla::IMPUESTO
-                recibeJugador_impuesto(actual, todos)
-            when TipoCasilla::JUEZ
-                recibeJugador_juez(actual, todos)
-            when TipoCasilla::SORPRESA
-                recibeJugador_sorpresa(actual, todos)
-            else
+            if (jugadorCorrecto(actual, todos))
                 informe(actual, todos)
+                case @tipo
+                when TipoCasilla::CALLE
+                    recibeJugador_calle(actual, todos)
+                when TipoCasilla::IMPUESTO
+                    recibeJugador_impuesto(actual, todos)
+                when TipoCasilla::JUEZ
+                    recibeJugador_juez(actual, todos)
+                when TipoCasilla::SORPRESA
+                    recibeJugador_sorpresa(actual, todos)
+                end
             end
         end
 
         private
+        def recibeJugador_calle(actual, todos)
+            jugador = todos[actual]
+            if !@tituloPropiedad.tienePropietario()
+                jugador.puedeComprarCasilla
+            else
+                @tituloPropiedad.tramitarAlquiler(jugador)
+            end
+        end
+
+        def recibeJugador_sorpresa(actual, todos)
+            @sorpresa = @mazo.siguiente
+            @sorpresa.aplicarAJugador(actual, todos)
+        end
+
         def recibeJugador_impuesto(actual, todos)
             todos[actual].pagaImpuesto(@importe);
         end
 
-        def recibeJugador_calle(actual, todos)
-            if jugadorCorrecto(actual, todos)
-                informe(actual, todos)
-                jugador = todos[actual].clone
-
-                if !@tituloPropiedad.tienePropietario(jugador)
-                    jugador.puedeComprarCasilla
-                else
-                    @tituloPropiedad.tramitarAlquiler(nuevo)
-                end
-            end
-        end
 
         def recibeJugador_juez(actual, todos)
             todos[actual].encarcelar(@@carcel)
         end
 
-        def recibeJugador_sorpresa(actual, todos)
-            if jugadorCorrecto(actual, todos)
-                @sorpresa = @mazo.siguiente
-                if(@sorpresa == nil)
-                    puts "ERROR"
-                end
-                puts "MAAAAAAAAAAAAAAAAAAAAAAAZOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO"
-                puts @mazo.toString
-                informe(actual, todos)
-                @sorpresa.aplicarAJugador(actual, todos)
-            end
-
-        end
 
         private_class_method :new
         

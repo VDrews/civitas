@@ -62,7 +62,11 @@ module Civitas
             puts "ACTUAL: #{actual}"
             puts "TIRADA: #{tirada}"
             if (correcto) 
-                return (actual + tirada) % @casillas.length
+                posicion=(actual + tirada) % @casillas.length
+                if (posicion != (actual+tirada))
+                    @porSalida+=1
+                end
+                return posicion
             end
             
             return -1

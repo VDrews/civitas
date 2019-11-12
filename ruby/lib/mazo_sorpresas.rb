@@ -41,9 +41,8 @@ module Civitas
             end
             @usadas+=1
             @ultimaSorpresa=@sorpresas[0]
-            # @sorpresas.delete_at(0)
-
-            # PETA PORQUE SE QUEDA SIN CARTAS
+            @sorpresas.delete_at(0)
+            @sorpresas << @ultimaSorpresa
             
             return @ultimaSorpresa    
         end
@@ -63,7 +62,7 @@ module Civitas
                 param = @sorpresas[index]
                 @sorpresas.delete_at(index)
                 @cartasEspeciales.push(param)
-                Diario.instance.ocurreEvento("Se ha inhabilitado la carta nº" + index + "al mazo de cartas")
+                Diario.instance.ocurreEvento("Se ha inhabilitado la carta nº" + index.to_s + "al mazo de cartas")
             end
         end
 
@@ -73,7 +72,7 @@ module Civitas
                 param = @cartasEspeciales[index]
                 @cartasEspeciales.delete_at(index)
                 @sorpresas.push(param)
-                Diario.instance.ocurreEvento("Se ha habilitado la carta nº" + index + "al mazo de cartas")
+                Diario.instance.ocurreEvento("Se ha habilitado la carta nº" + index.to_s + "al mazo de cartas")
         
             end
         end

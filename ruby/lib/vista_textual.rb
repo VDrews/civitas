@@ -1,7 +1,9 @@
 #encoding:utf-8
 require_relative 'operaciones_juego'
+require_relative 'respuestas'
 require_relative 'salidas_carcel'
 require 'io/console'
+require_relative 'gestiones_inmobiliarias'
 
 module Civitas
 
@@ -74,13 +76,16 @@ module Civitas
     end
     
     def comprar
-      lista_Respuestas = [Respuestas::NO, Respuestas::Si]
+      lista_Respuestas = [Respuestas::NO, Respuestas::SI]
       return lista_Respuestas[menu("¿Quieres comprar la calle?", ["NO", "SI"])]
     end
 
     def gestionar
-      @iGestion = menu("Número de gestión de inmobiliaria", ["VENDER", "HIPOTECAR", "CANCELAR_HIPOTECA", "CONSTRUIR_CASA", "CONSTRUIR_CASA", "CONSTRUIR_HOTEL", "TERMINAR"])
-      @iPropiedad = menu("Número de la propiedad", @juego.getJugadorActual.propiedades)
+      gestiones=[GestionesInmobiliarias::VENDER, GestionesInmobiliarias::HIPOTECAR, GestionesInmobiliarias::CANCELAR_HIPOTECA, GestionesInmobiliarias::CONSTRUIR_CASA, GestionesInmobiliarias::CONSTRUIR_HOTEL, GestionesInmobiliarias::TERMINAR]
+      @iGestion = gestiones[menu("Número de gestión de inmobiliaria", ["VENDER", "HIPOTECAR", "CANCELAR_HIPOTECA", "CONSTRUIR_CASA", "CONSTRUIR_HOTEL", "TERMINAR"])]
+      unless (@iGestion==GestionesInmobiliarias::TERMINAR)
+        @iPropiedad = menu("Número de la propiedad", @juegoModel.getJugadorActual.getPropiedades_toString)
+      end
     end
 
     def getGestion
@@ -119,7 +124,7 @@ module Civitas
     end
 
     def actualizarVista
-      @juegoModel.infoJugadorTexto
+      @juegoModel.actualizarInfo
     end
 
     

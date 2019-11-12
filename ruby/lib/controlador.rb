@@ -1,3 +1,6 @@
+require_relative('operacion_inmobiliaria')
+require_relative('gestiones_inmobiliarias')
+
 module Civitas
     class Controlador
         def initialize(juego, vista)
@@ -10,13 +13,13 @@ module Civitas
             @vista.setCivitasJuego(@juego)
 
             isFinal = @juego.finalDelJuego()
-            while !isFinal
-                #@vista.pausa
+            while !isFinal do
+                @vista.pausa
                 siguientePaso = @juego.siguientePaso
                 @vista.mostrarSiguienteOperacion(siguientePaso)
                 
                 
-                if (siguientePaso != "PASAR_TURNO")
+                if (siguientePaso != Operaciones_juego::PASAR_TURNO)
                     @vista.mostrarEventos
                 end
                 
@@ -29,29 +32,43 @@ module Civitas
                     when Operaciones_juego::COMPRAR
                         if (@vista.comprar == Respuestas::SI)
                             @juego.comprar
-                            @juego.siguientePasoCompletado(Operaciones_juego::COMPRAR)
                         end
+                        @juego.siguientePasoCompletado(Operaciones_juego::COMPRAR)
+                                                            
                     when Operaciones_juego::GESTIONAR
                         @vista.gestionar
-                        operacionInmobiliaria = OperacionInmobiliaria.new(@vista.getGestion, @vista.getPropiedad)
+                        operacion = OperacionInmobiliaria.new(@vista.getGestion, @vista.getPropiedad)
+                        ip=operacion.numPropiedad
+
+                        case operacion.gestion
+                        when GestionesInmobiliarias::VENDER
+                            @juego.vender(ip)
+                        when GestionesInmobiliarias::HIPOTECAR
+                            @juego.hipotecar(ip)
+                        when GestionesInmobiliarias::CANCELAR_HIPOTECA
+                            @juego.cancelarHipoteca(ip)
+                        when GestionesInmobiliarias::CONSTRUIR_CASA
+                            @juego.construirCasa(ip)
+                        when GestionesInmobiliarias::CONSTRUIR_HOTEL
+                            @juego.construirHotel(ip)
+                        end
                         @juego.siguientePasoCompletado(Operaciones_juego::GESTIONAR)
-
-                        if @vista.getGestion == 6
-                            @juego.siguientePasoCompletado(Operaciones_juego::TERMINAR)
-                        end
-
+                                       
                     when Operaciones_juego::SALIR_CARCEL
-                        if (@vista.salirCarcel == SalidasCarcel::PAGANDO)
-                            @juego.salirCarcelPagando()
-                        else
-                            @juego.salirCarcelTirando()
-                        end
-                        @juego.siguientePasoCompletado(Operaciones_juego::SALIR_CARCEL)
                         
-                    else
-                        puts "No esta entrando por ningún lao" 
+                        case @vista.salirCarcel
+                        when SalidasCarcel::PAGANDO
+                            @juego.salirCarcelPagando
+                            @juego.siguientePasoCompletado(Operaciones_juego::SALIR_CARCEL)
+                        when SalidasCarcel::TIRANDO
+                            @juego.salirCarcelTirando
+                            @juego.siguientePasoCompletado(Operaciones_juego::SALIR_CARCEL)
+                        end
                     end
-                end     
+                    @vista.actualizarVista
+                else
+                    @juego.actualizarInfo
+                end
             end       
         end
     end

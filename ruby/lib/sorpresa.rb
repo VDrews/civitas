@@ -33,12 +33,9 @@ module Civitas
         def aplicarAJugador_irACasilla(actual, todos)
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
-                puts "CASILLAACTUAL: #{todos[actual].getNumCasillaActual}"
-                puts "VALOR: #{@valor}"
                 tirada = @tablero.calcularTirada(todos[actual].getNumCasillaActual, @valor)
                 nueva_pos = @tablero.nuevaPosicion(todos[actual].getNumCasillaActual, tirada)
                 todos[actual].moverACasilla(nueva_pos)
-                puts "NUEVA POS: #{nueva_pos}"
                 @tablero.getCasilla(nueva_pos).recibeJugador(actual, todos)
             end
 
@@ -47,7 +44,7 @@ module Civitas
         def aplicarAJugador_irCarcel(actual, todos)
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
-                todos[actual].encarcelar(@tablero.getCarcel) # Arreglar esto
+                todos[actual].encarcelar(@valor)
             end
         end
 
@@ -68,10 +65,10 @@ module Civitas
         def aplicarAJugador_porJugador(actual, todos)
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
-                sorpresa= Sorpresa.new(tipo:TipoSorpresa::PAGARCOBRAR, valor:@valor*-1)
-                for i in 0...todos.size do
+                s1= Sorpresa.new(tipo:TipoSorpresa::PAGARCOBRAR, valor:@valor*-1)
+                for i in todos do
                     if i!=actual
-                        sorpresa.aplicarAJugador(i, todos)
+                        s1.aplicarAJugador(i, todos)
                     end
                 end
 
