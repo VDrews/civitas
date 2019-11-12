@@ -56,10 +56,6 @@ module Civitas
                                        
                     when Operaciones_juego::SALIR_CARCEL
                         
-<<<<<<< HEAD
-                    else
-                        puts "No esta entrando por ningún lado" 
-=======
                         case @vista.salirCarcel
                         when SalidasCarcel::PAGANDO
                             @juego.salirCarcelPagando
@@ -68,7 +64,6 @@ module Civitas
                             @juego.salirCarcelTirando
                             @juego.siguientePasoCompletado(Operaciones_juego::SALIR_CARCEL)
                         end
->>>>>>> 5011d6f146ad65ecc16fa8dfe38d54b2def790d4
                     end
                     @vista.actualizarVista
                 else
