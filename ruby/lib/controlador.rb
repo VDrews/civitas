@@ -15,8 +15,7 @@ module Civitas
                 siguientePaso = @juego.siguientePaso
                 @vista.mostrarSiguienteOperacion(siguientePaso)
                 
-                
-                if (siguientePaso != "PASAR_TURNO")
+                if (siguientePaso != Operaciones_juego::PASAR_TURNO)
                     @vista.mostrarEventos
                 end
                 
@@ -49,7 +48,7 @@ module Civitas
                         @juego.siguientePasoCompletado(Operaciones_juego::SALIR_CARCEL)
                         
                     else
-                        puts "No esta entrando por ningún lao" 
+                        puts "No esta entrando por ningún lado" 
                     end
                 end     
             end       

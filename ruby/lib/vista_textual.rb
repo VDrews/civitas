@@ -63,9 +63,9 @@ module Civitas
       }
 
       opcion = lee_entero(lista.length,
-                          "\n"+tab+"Elige una opción: ",
-                          tab+"Valor erróneo")
-      return opcion
+        "\n"+tab+"Elige una opción: ",
+        tab+"Valor erróneo")
+        return opcion
     end
 
     def salirCarcel

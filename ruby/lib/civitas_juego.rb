@@ -17,7 +17,6 @@ module Civitas
                 |n| @jugadores.push(Jugador.new(n))
             }
             
-
             @gestorEstados = GestorEstados.new
             @estado = @gestorEstados.estadoInicial
 

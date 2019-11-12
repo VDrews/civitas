@@ -7,7 +7,7 @@ import civitas.Respuestas;
 import civitas.SalidasCarcel;
 import civitas.OperacionInmobiliaria;
 
-class Controlador {
+public class Controlador {
     private CivitasJuego juego;
     private VistaTextual vista;
 
@@ -23,6 +23,11 @@ class Controlador {
             OperacionesJuego siguiente=juego.siguientePaso();
             vista.mostrarSiguienteOperacion(siguiente);
 
+
+            vista.actualizarVista();            
+            if (siguiente != OperacionesJuego.PASAR_TURNO) {
+                vista.mostrarEventos();
+            }
             
 
             if (juego.finalDelJuego())

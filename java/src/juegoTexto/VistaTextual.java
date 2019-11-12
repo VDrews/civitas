@@ -12,7 +12,7 @@ import civitas.Casilla;
 import civitas.Jugador;
 import civitas.TituloPropiedad;
 
-class VistaTextual {
+public class VistaTextual {
 
   CivitasJuego juegoModel;
   int iGestion = -1;
