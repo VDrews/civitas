@@ -21,7 +21,7 @@ public class Jugador implements Comparable<Jugador> {
         this.nombre = nombre;
         encarcelado = false;
         numCasillaActual = 0;
-        puedeComprar = true;
+        puedeComprar = false;
         saldo = saldoInicial;
         salvoconducto = null;
         propiedades = new ArrayList<TituloPropiedad>();
