@@ -1,29 +1,10 @@
+require_relative('jugador')
+
 module Civitas
 
     class TituloPropiedad
 
-        attr_reader :hipotecado, :hipotecaBase, :nombre, :numCasas, :numHoteles, :precioCompra, :precioEdificar, :propietario
         
-        private
-        @@factorInteresesHipoteca=1.1
-
-        def esEsteElPropietario(jugador)
-            return @propietario==jugador
-        end
-
-        def getPrecioAlquiler
-            if (!@hipotecado || propietarioEncarcelado)
-                return (@alquilerBase*(1+(@numCasas*0.5)+(numHoteles*2.5)))
-            else 
-                return 0
-            end
-        end
-
-        def propietarioEncarcelado
-            return (tienePropietario&&!@propietario.isEncarcelado)
-        end
-        
-        public
         def initialize(nom, ab, fr, hb, pc, pe)
             @alquilerBase=ab
             @factorRevalorizacion=fr
@@ -37,6 +18,33 @@ module Civitas
             @propietario=nil
         end
 
+        @@factorInteresesHipoteca=1.1
+        attr_reader :hipotecado, :hipotecaBase, :nombre, :numCasas, :numHoteles, :precioCompra, :precioEdificar, :propietario
+
+
+        private
+        def esEsteElPropietario(jugador)
+            return @propietario.nombre==jugador.nombre
+        end
+
+        def getPrecioAlquiler
+            if (!@hipotecado || !propietarioEncarcelado)
+                return (@alquilerBase*(1+(@numCasas*0.5)+(numHoteles*2.5)))
+            else 
+                return 0
+            end
+        end
+
+        def propietarioEncarcelado
+            return (tienePropietario&&!@propietario.isEncarcelado)
+        end
+
+        def getImporteHipoteca
+            return @hipotecaBase*(1+(@numCasas*0.5)+(@numHoteles*2.5))
+        end
+    
+
+        public
         def toString
             string="Alquiler Base: "+@alquilerBase.to_s
             string+=", Factor Revalorización: "+@factorRevalorizacion.to_s
@@ -54,7 +62,7 @@ module Civitas
         end
 
         def getImporteCancelarHipoteca
-            return (@@factorInteresesHipoteca*@hipotecaBase)
+            return (@@factorInteresesHipoteca*getImporteHipoteca)
         end
 
         def cancelarHipoteca (jugador)
@@ -68,7 +76,9 @@ module Civitas
         end
 
         def actualizaPropietarioPorConversion(jugador)
-            @propietario=jugador
+            if(!esEsteElPropietario(jugador))
+                @propietario=jugador
+            end
         end
 
         def cantidadCasasHoteles
@@ -76,8 +86,8 @@ module Civitas
         end
 
         def comprar(jugador)
-            if @propietario==nil
-                actualizaPropietarioPorConversion(jugador)
+            if !tienePropietario
+                @propietario=jugador
                 jugador.paga(@precioCompra)
                 return true
             else
@@ -87,6 +97,7 @@ module Civitas
 
         def construirCasa(jugador)
             if(esEsteElPropietario(jugador))
+                jugador.paga(@precioEdificar)
                 @numCasas += 1
                 return true
             else
@@ -96,6 +107,7 @@ module Civitas
 
         def construirHotel(jugador)
             if(esEsteElPropietario(jugador))
+                jugador.paga(@precioEdificar)
                 @numHoteles += 1
                 return true
             else
@@ -114,15 +126,15 @@ module Civitas
 
         def hipotecar(jugador)
             if (!@hipotecado && esEsteElPropietario(jugador))
-                jugador.recibe(@hipotecaBase)
-                @hipotecado=false
+                jugador.recibe(getImporteHipoteca)
+                @hipotecado=true
                 return true
             else
                 return false
             end
         end
 
-        def tienePropietario(jugador)
+        def tienePropietario
             return @propietario!=nil
         end
 
@@ -137,10 +149,11 @@ module Civitas
         end
 
         def vender(jugador)
-            if (!@hipotecado && !esEsteElPropietario(jugador))
-                @propietario.recibe(getPrecioVenta)
-                jugador.paga(getPrecioVenta)
-                @propietario=jugador
+            if (esEsteElPropietario(jugador))
+                @propietario=nil
+                jugador.recibe(getPrecioVenta)
+                @numCasas=0
+                @numHoteles=0
                 return true
             else
                 return false
@@ -148,7 +161,7 @@ module Civitas
         end
 
         def getPrecioVenta
-            return @precioCompra+(@precioEdificar*cantidadCasasHoteles)*@factorRevalorizacion
+            return (@precioCompra+(@numCasas+5*@numHoteles)*(@precioEdificar*@factorRevalorizacion))
         end
     end
 end

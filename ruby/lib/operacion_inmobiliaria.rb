@@ -6,11 +6,7 @@ module Civitas
             @gestion = gest #gestionesinmobiliarias
         end
 
-        def getGestion #gestionesinmobiliarias
-        end
+        attr_reader :numPropiedad, :gestion
 
-        def getNumPropiedad #int
-            
-        end
     end
 end

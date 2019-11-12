@@ -45,8 +45,12 @@ public class TituloPropiedad {
         }
     }
 
+    private float getImporteHipoteca() {
+        return hipotecaBase * (1 + (numCasas * 0.5f) + (numHoteles * 2.5f));
+    }
+
     float getImporteCancelarHipoteca() {
-        return hipotecaBase * factorInteresesHipoteca;
+        return getImporteHipoteca() * factorInteresesHipoteca;
     }
 
     boolean cancelarHipoteca(Jugador jugador) {
@@ -63,7 +67,7 @@ public class TituloPropiedad {
 
     boolean hipotecar(Jugador jugador) {
         if (!hipotecado && esEsteElPropietario(jugador)) {
-            jugador.recibe(hipotecaBase);
+            jugador.recibe(getImporteHipoteca());
             hipotecado = true;
             return true;
         } else {
@@ -96,7 +100,7 @@ public class TituloPropiedad {
     }
 
     float getPrecioVenta() {
-        return precioCompra + (precioEdificar * factorRevalorizacion);
+        return precioCompra + (numCasas + 5 * numHoteles) * (precioEdificar * factorRevalorizacion);
     }
 
     boolean construirCasa(Jugador jugador) {
@@ -135,8 +139,7 @@ public class TituloPropiedad {
     }
 
     private boolean esEsteElPropietario(Jugador jugador) {
-        return (jugador.getNombre() == propietario.getNombre()); // Considerando que los nombres de los jugadores son
-                                                                 // únicos
+        return (jugador.getNombre() == propietario.getNombre());
     }
 
     boolean tienePropietario() {
@@ -175,6 +178,8 @@ public class TituloPropiedad {
         if (esEsteElPropietario(jugador)) {
             propietario = null;
             jugador.recibe(getPrecioVenta());
+            numCasas = 0;
+            numHoteles = 0;
             return true;
         }
         return false;

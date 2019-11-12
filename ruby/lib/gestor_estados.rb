@@ -39,7 +39,7 @@ module Civitas
         end
 
       when EstadosJuego::DESPUES_COMPRAR
-        if (jugador.tiene_algo_que_gestionar)
+        if (jugador.tieneAlgoQueGestionar)
           op = Operaciones_juego::GESTIONAR
         else
           op = Operaciones_juego::PASAR_TURNO

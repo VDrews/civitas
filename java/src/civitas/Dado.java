@@ -16,7 +16,7 @@ public class Dado {
         random = new Random();
     }
 
-    static Dado getInstance() {
+    public static Dado getInstance() {
         return instance;
     }
 
@@ -49,7 +49,7 @@ public class Dado {
         return getRandomNumberInRange(0, n - 1);
     }
 
-    void setDebug(boolean d) {
+    public void setDebug(boolean d) {
         debug = d;
         String e = "Dado--Modo debug: ";
         if (d)

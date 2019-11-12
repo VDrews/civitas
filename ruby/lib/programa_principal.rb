@@ -7,13 +7,13 @@ require_relative('controlador')
 
 module Civitas
 
-    class TestP3
+    class ProgramaPrincipal
         def initialize
         end
 
         def self.main
             vista = Vista_textual.new
-            juego = CivitasJuego.new(["Jugador 1", "Jugador 2", "Jugador 3", "Jugador 4"])
+            juego = CivitasJuego.new(["Java", "Ruby"])
             Dado.instance.setDebug(true)
             controlador = Controlador.new(juego, vista)
 
@@ -22,6 +22,6 @@ module Civitas
 
     end
 
-    TestP3.main
+    ProgramaPrincipal.main
 
 end

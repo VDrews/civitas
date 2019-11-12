@@ -1,0 +1,25 @@
+Casillas:
+Salida x1
+Calle x12
+Sorpresa x3
+Juez x1
+Cárcel x1
+Impuesto x1
+Parking x1
+
+Total: 20 casillas
+Lay-out:    Salida, Calle, Sorpresa, Calle, Cárcel
+            Calle, Calle, Sorpresa, Calle, Parking
+            Calle, Calle, Sorpresa, Calle, Juez
+            Calle, Calle, Impuesto, Calle, Calle
+
+--------------------------------------------
+
+Sorpresa: 10 cartas
+
+Lay-out:
+PagarCobrar x2 (1 positiva, 1 negativa)
+IrCasilla x3 (1 para Carcel)
+PorCasaHotel x2 (1+1-)
+PorJugador x2 (1+1-)
+SalirCarcel, IrCarcel
