@@ -66,7 +66,7 @@ module Civitas
             if jugadorCorrecto(actual, todos)
                 informe(actual, todos)
                 s1= Sorpresa.new(tipo:TipoSorpresa::PAGARCOBRAR, valor:@valor*-1)
-                for i in todos do
+                for i in 0...todos.length do
                     if i!=actual
                         s1.aplicarAJugador(i, todos)
                     end
