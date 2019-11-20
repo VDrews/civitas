@@ -8,6 +8,7 @@ require_relative('tablero')
 require_relative('sorpresa')
 require_relative('tipo_sorpresa')
 
+
 module Civitas
     class CivitasJuego
         def initialize(nombres)
@@ -47,25 +48,25 @@ module Civitas
         def inicializaTablero(mazo)
             @tablero = Tablero.new(4)
 
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newSorpresa(@mazo, "Suerte")) 
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 2", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaSorpresa.new(@mazo)) 
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 2", 1.5, -0.5, 30.0, 60.0, 30.0)))
             
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 3", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 4", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newSorpresa(@mazo, "Suerte")) 
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 5", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newDescanso("Burger King")) 
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 6", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 7", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newSorpresa(@mazo, "Sorpresa3")) 
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 8", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 3", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 4", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaSorpresa.new(@mazo)) 
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 5", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(Casilla.new("Burger King")) 
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 6", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 7", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaSorpresa.new(@mazo))
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 8", 1.5, -0.5, 30.0, 60.0, 30.0)))
             @tablero.añadeJuez
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 9", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 10", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newImpuesto(200.5, "Peaje3")) 
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 11", 1.5, -0.5, 30.0, 60.0, 30.0)))
-            @tablero.añadeCasilla(Casilla.newCalle(TituloPropiedad.new("Ladrón 12", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 9", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 10", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaImpuesto.new("Peaje", 200)) 
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 11", 1.5, -0.5, 30.0, 60.0, 30.0)))
+            @tablero.añadeCasilla(CasillaCalle.new(TituloPropiedad.new("Ladrón 12", 1.5, -0.5, 30.0, 60.0, 30.0)))
         end
         
         def inicializaMazoSorpresas(tablero)

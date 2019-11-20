@@ -1,4 +1,9 @@
 require_relative 'casilla'
+require_relative 'casilla_calle'
+require_relative 'casilla_impuesto'
+require_relative 'casilla_juez'
+require_relative 'casilla_sorpresa'
+
 
 module Civitas
     class Tablero
@@ -8,7 +13,7 @@ module Civitas
         @porSalida = 0
         @tieneJuez = false
         
-        @casillas.push(Casilla.newDescanso('Salida'))
+        @casillas.push(Casilla.new('Salida'))
 
         end
         
@@ -35,17 +40,17 @@ module Civitas
 
         def añadeCasilla(casilla)
             if (@casillas.length == @numCasillaCarcel) 
-                @casillas.push(Casilla.newDescanso("Cárcel"))
+                @casillas.push(Casilla.new("Cárcel"))
             end
             @casillas.push(casilla)
             if (@casillas.length == @numCasillaCarcel) 
-                @casillas.push(Casilla.newDescanso("Cárcel"))
+                @casillas.push(Casilla.new("Cárcel"))
             end
         end
 
         def añadeJuez()
             if (!@tieneJuez)
-                @casillas.push(Casilla.newJuez(@numCasillaCarcel, "Juez"))
+                @casillas.push(CasillaJuez.new(@numCasillaCarcel))
                 @tieneJuez = true
             end
         end
