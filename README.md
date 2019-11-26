@@ -87,9 +87,9 @@ El alquiler lo recibirá el dueño del título de propiedad de la casilla a no s
 ### Hipotecas
 Un jugador puede hipotecar alguna propiedad de la cual sea dueño, aunque no necesite el dinero. No tiene que estar en dicha casilla ni tiene que derruir sus edificios. Recibirá la siguiente cantidad:
 ```
-CantidadRecibida=HipotecaBase*(1+(numCasas*0.5)+(numHoteles*2.5))
+CantidadRecibida = HipotecaBase * (1 + (numCasas * 0.5) + (numHoteles * 2.5))
 ```
-De la misma manera se puede revocar la hipoteca. Devolverá lo recibido más un 10% de interés.
+De la misma manera se puede revocar la hipoteca. Devolverá lo recibido más un 10 % de interés.
 
 ### Cárcel
 Un jugador irá a la cárcel si el juez o una tarjeta sorpresa lo ordenan, a no ser que posea una tarjeta de SALIRCARCEL (salvoconducto), la cual devolverá al mazo al usarse.
@@ -112,5 +112,3 @@ Tipo | Acción | Cantidad en el mazo
 
 #### Referencias
  README basado en el documento _Civitas. Reglas del juego_ (`CivitasElJuego.pdf`).
-
- Fin del documento.
