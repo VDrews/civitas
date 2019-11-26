@@ -4,7 +4,7 @@ Civitas es una adaptación del juego Monopoly® de Hasbro, donde el objetivo es 
 
 El proyecto se implementa en Java y Ruby, para la asignatura de PDOO de 3. curso de Ingeniería Informática+ADE de la UGR (2019-20)
 
-## Autores
+### Autores
 * Andrés José García Macías
 * José Mª Poblador Márquez
 
