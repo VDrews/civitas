@@ -6,7 +6,7 @@ Así mismo, el apartado 2 de dicho artículo contempla medidas y responsabilidad
 Con ello, y de acuerdo con el apartado 3 de dicho artículo, declaramos la originalidad de este trabajo, en los términos allí descritos y a todos los efectos.
 
 # LICENCE
-In accordance with article 15, section 1, of the Evaluation and Qualification Normative of the University of Granada, the authorship of works presented by its students is officially recognized, as well as its protection according to current copyright laws.
+In accordance with article 15, section 1, of the Evaluation and Qualification Normative of the University of Granada, the authorship of works presented by its students is officially recognized, as well as their protection according to current copyright laws.
 
 Moreover, section 2 of this article foresees disciplinary measures and responsibilities in order to avoid plagiarism, in the terms defined therein.
 
