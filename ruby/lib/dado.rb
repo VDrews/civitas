@@ -10,7 +10,6 @@ module Civitas
         @@debug = false #bool
 
         def initialize 
-
         end
 
         def tirar #int
@@ -31,7 +30,7 @@ module Civitas
         end
 
         def quienEmpieza(n)
-            ran = rand(1..n).floor - 1
+            ran = rand(0...n)
             return ran
         end
 
