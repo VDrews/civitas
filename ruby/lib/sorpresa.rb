@@ -12,7 +12,7 @@ module Civitas
 
        
         def informe(actual, todos)
-            Diario.instance.ocurreEvento("Se aplica #{toString} a "todos[actual].nombre)
+            Diario.instance.ocurreEvento("Se aplica #{toString} a "+todos[actual].nombre)
         end
 
         def jugadorCorrecto (actual, todos)

@@ -2,7 +2,7 @@ module Civitas
     class SorpresaIrCarcel < Sorpresa
         public_class_method :new
         def initialize(tablero)
-            super("Carcel")
+            super("A la Carcel")
             @tablero=tablero
         end
         

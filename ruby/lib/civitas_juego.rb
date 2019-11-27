@@ -5,9 +5,12 @@ require_relative('gestor_estados')
 require_relative('mazo_sorpresas')
 require_relative('dado')
 require_relative('tablero')
-require_relative('sorpresa')
-require_relative('tipo_sorpresa')
-
+require_relative('sorpresa_ircarcel')
+require_relative('sorpresa_salircarcel')
+require_relative('sorpresa_ircasilla')
+require_relative('sorpresa_pagarcobrar')
+require_relative('sorpresa_porjugador')
+require_relative('sorpresa_porcasahotel')
 
 module Civitas
     class CivitasJuego
@@ -70,18 +73,16 @@ module Civitas
         end
         
         def inicializaMazoSorpresas(tablero)
-
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::IRCARCEL, valor:@tablero.getCarcel, tablero:@tablero))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::SALIRCARCEL, mazo: @mazo))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:3, texto:"Ir a casilla"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:6, texto:"Ir a casilla"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::IRCASILLA, tablero:@tablero, valor:10, texto:"Ir a casilla"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PAGARCOBRAR, tablero:@tablero, valor:50, texto:"Pagar cobrar"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PAGARCOBRAR, tablero:@tablero, valor:-70, texto:"Pagar cobrar"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PORJUGADOR, tablero:@tablero, valor:10, texto:"Jugador"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PORJUGADOR, tablero:@tablero, valor:-10, texto:"Jugador"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PORCASAHOTEL, tablero:@tablero, valor:25, texto:"Casa o hotel"))
-            @mazo.alMazo(Sorpresa.new(tipo:TipoSorpresa::PORCASAHOTEL, tablero:@tablero, valor:-20, texto:"Casa o hotel"))
+            @mazo.alMazo(SorpresaIrCarcel.new(@tablero))
+            @mazo.alMazo(SorpresaSalirCarcel.new(@mazo))
+            @mazo.alMazo(SorpresaIrCasilla.new("A la casilla", @tablero, 3))
+            @mazo.alMazo(SorpresaIrCasilla.new("A la casilla", @tablero, 6))
+            @mazo.alMazo(SorpresaPagarCobrar.new("Paga", -70))
+            @mazo.alMazo(SorpresaPagarCobrar.new("Cobra", 50))
+            @mazo.alMazo(SorpresaPorJugador.new("Paga_jugador", -10))
+            @mazo.alMazo(SorpresaPorJugador.new("Cobra_jugador", 10))
+            @mazo.alMazo(SorpresaPorJugador.new("Obras", -20))
+            @mazo.alMazo(SorpresaPorJugador.new("Casahotel", 25))
         end
 
         def contabilizarPasosPorSalida(jugadorActual)
