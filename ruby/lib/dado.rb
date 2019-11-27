@@ -5,24 +5,23 @@ module Civitas
     class Dado
         include Singleton
         @@SalidaCarcel = 5
-        @@random = nil
-        @@ultimoResultado = 1 #int
-        @@debug = false #bool
-
+        
         def initialize 
+            @ultimoResultado = 1 #int
+            @debug = false #bool
         end
 
         def tirar #int
-            if (!@@debug)
-                @@ultimoResultado = rand(1..6).floor
+            if (!@debug)
+                @ultimoResultado = rand(1...6)
             end
 
-            return @@ultimoResultado
+            return @ultimoResultado
         end
 
         def salgoDeLaCarcel
             tirar()
-            if (@@ultimoResultado == @@SalidaCarcel)
+            if (@ultimoResultado == @@SalidaCarcel)
                 return true
             else
                 return false
@@ -35,7 +34,7 @@ module Civitas
         end
 
         def setDebug(d)
-            @@debug = d
+            @debug = d
             if (d)
                 cadena = "El modo debug ha sido activado"
             else
@@ -45,13 +44,13 @@ module Civitas
         end
 
         def ultimoResultado
-            return @@ultimoResultado
+            return @ultimoResultado
         end
 
         def toString
             string="Salida carcel: "+@@SalidaCarcel.to_s
-            string+=" Ultimo resultado: "+@@ultimoResultado.to_s
-            string+=" Debug: "+@@debug.to_s
+            string+=" Ultimo resultado: "+@ultimoResultado.to_s
+            string+=" Debug: "+@debug.to_s
             return string
         end
 
