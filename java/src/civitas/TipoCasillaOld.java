@@ -1,5 +1,5 @@
 package civitas;
 
-enum TipoCasilla {
+enum TipoCasillaOld {
     CALLE, SORPRESA, JUEZ, IMPUESTO, DESCANSO
 }

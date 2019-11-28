@@ -7,15 +7,15 @@ public class Jugador implements Comparable<Jugador> {
     protected final static int CasasPorHotel = 4;
     protected boolean encarcelado;
     protected static final int HotelesMax = 4;
-    private String nombre;
-    private int numCasillaActual;
+    protected String nombre;
+    protected int numCasillaActual;
     protected final static int pasoPorSalida = 1000;
     protected final static int precioLibertad = 200;
     private boolean puedeComprar;
-    private float saldo;
+    protected float saldo;
     private final static float saldoInicial = 7500;
-    private Sorpresa salvoconducto;
-    private ArrayList<TituloPropiedad> propiedades;
+    private SorpresaSalirCarcel salvoconducto;
+    protected ArrayList<TituloPropiedad> propiedades;
 
     Jugador(String nombre) {
         this.nombre = nombre;
@@ -28,13 +28,13 @@ public class Jugador implements Comparable<Jugador> {
     }
 
     protected Jugador(Jugador otro) {
-        otro.encarcelado = encarcelado;
-        otro.nombre = nombre;
-        otro.numCasillaActual = numCasillaActual;
-        otro.puedeComprar = puedeComprar;
-        otro.saldo = saldo;
-        otro.salvoconducto = salvoconducto;
-        otro.propiedades = propiedades;
+        encarcelado = otro.encarcelado;
+        nombre = otro.nombre;
+        numCasillaActual = otro.numCasillaActual;
+        puedeComprar = otro.puedeComprar;
+        saldo = otro.saldo;
+        salvoconducto = otro.salvoconducto;
+        propiedades = otro.propiedades;
     }
 
     protected boolean debeSerEncarcelado() {
@@ -61,7 +61,7 @@ public class Jugador implements Comparable<Jugador> {
         return encarcelado;
     }
 
-    boolean obtenerSalvoconducto(Sorpresa s) {
+    boolean obtenerSalvoconducto(SorpresaSalirCarcel s) {
         if (encarcelado) {
             return false;
         }
@@ -74,7 +74,7 @@ public class Jugador implements Comparable<Jugador> {
         }
     }
 
-    private void perderSalvoconducto() {
+    protected void perderSalvoconducto() {
         salvoconducto.usada();
         salvoconducto = null;
     }
@@ -131,7 +131,7 @@ public class Jugador implements Comparable<Jugador> {
         }
     }
 
-    private boolean puedoGastar(float precio) {
+    protected boolean puedoGastar(float precio) {
         if (encarcelado)
             return false;
         return saldo >= precio;

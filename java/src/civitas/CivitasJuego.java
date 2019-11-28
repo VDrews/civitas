@@ -38,25 +38,25 @@ public class CivitasJuego {
     private void inicializaTablero(MazoSorpresas mazo) {
         tablero = new Tablero(4);
         // Implícito                                                                                            //Salida
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Ladrón", 1.5f, -0.5f, 30f, 60f, 30f)));           //Calle 1.1
-        tablero.añadeCasilla(new Casilla(mazo, "Suerte"));                                                      // Sorpresa
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Cloti", 2f, -0.5f, 45f, 70f, 45f)));              //Calle 1.2
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Ladrón", 1.5f, -0.5f, 30f, 60f, 30f)));           //Calle 1.1
+        tablero.añadeCasilla(new CasillaSorpresa(mazo, "Suerte"));                                                      // Sorpresa
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Cloti", 2f, -0.5f, 45f, 70f, 45f)));              //Calle 1.2
         // Implícito                                                                                            //Cárcel
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Tortu", 5f, 0f, 50f, 100f, 50f)));                //Calle 2.1
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Pedro", 5f, 0f, 50f, 100f, 50f)));                //Calle 2.2
-        tablero.añadeCasilla(new Casilla(mazo, "Suerte"));                                                      //Sorpresa
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Román", 7f, 0f, 75f, 150f, 75f)));                //Calle 2.3
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Tortu", 5f, 0f, 50f, 100f, 50f)));                //Calle 2.1
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Pedro", 5f, 0f, 50f, 100f, 50f)));                //Calle 2.2
+        tablero.añadeCasilla(new CasillaSorpresa(mazo, "Suerte"));                                                      //Sorpresa
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Román", 7f, 0f, 75f, 150f, 75f)));                //Calle 2.3
         tablero.añadeCasilla(new Casilla("Parking"));                                                           //Descanso
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Victor", 10f, 0.5f, 100f, 200f, 100f)));          //Calle 3.1
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Aceituno", 10f, 0.5f, 100f, 200f, 100f)));        //Calle 3.2
-        tablero.añadeCasilla(new Casilla(mazo, "Suerte"));                                                      //Sorpresa
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Juan Antonio", 12f, 0.5f, 125f, 250f, 125f)));    //Calle 3.3
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Victor", 10f, 0.5f, 100f, 200f, 100f)));          //Calle 3.1
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Aceituno", 10f, 0.5f, 100f, 200f, 100f)));        //Calle 3.2
+        tablero.añadeCasilla(new CasillaSorpresa(mazo, "Suerte"));                                                      //Sorpresa
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Juan Antonio", 12f, 0.5f, 125f, 250f, 125f)));    //Calle 3.3
         tablero.añadeJuez();                                                                                    //Juez
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("GOOOD", 15f, 1f, 150f, 300f, 150f)));             //Calle 4.1
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Paco Pepe", 15f, 1f, 150f, 300f, 150f)));         //Calle 4.2
-        tablero.añadeCasilla(new Casilla(500f, "Hacienda somos todos"));                                        //Impuesto
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Beñat", 25f, 1.5f, 200f, 400f, 200f)));           //Calle 5.1
-        tablero.añadeCasilla(new Casilla(new TituloPropiedad("Urrutikoetxea", 25f, 1.5f, 200f, 400f, 200f)));   //Calle 5.2
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("GOOOD", 15f, 1f, 150f, 300f, 150f)));             //Calle 4.1
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Paco Pepe", 15f, 1f, 150f, 300f, 150f)));         //Calle 4.2
+        tablero.añadeCasilla(new CasillaImpuesto(500f, "Hacienda somos todos"));                                        //Impuesto
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Beñat", 25f, 1.5f, 200f, 400f, 200f)));           //Calle 5.1
+        tablero.añadeCasilla(new CasillaCalle(new TituloPropiedad("Urrutikoetxea", 25f, 1.5f, 200f, 400f, 200f)));   //Calle 5.2
         
     }
 
@@ -181,7 +181,7 @@ public class CivitasJuego {
     public boolean comprar() {
         Jugador jugadorActual = getJugadorActual();
         int numCasillaActual = jugadorActual.getNumCasillaActual();
-        Casilla casilla = tablero.getCasilla(numCasillaActual);
+        CasillaCalle casilla = (CasillaCalle)tablero.getCasilla(numCasillaActual);
         TituloPropiedad titulo = casilla.getTituloPropiedad();
         boolean res = jugadorActual.comprar(titulo);
         return res;
