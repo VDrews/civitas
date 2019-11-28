@@ -45,5 +45,12 @@ module Civitas
             str+="JUGADOR ESPECULADOR"
         end
 
+        def pagaImpuesto(cantidad)
+            if @encarcelado 
+                return false 
+            end
+            return paga(cantidad/2)
+        end
+
     end
 end

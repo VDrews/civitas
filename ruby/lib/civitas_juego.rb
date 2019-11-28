@@ -83,8 +83,8 @@ module Civitas
             @mazo.alMazo(SorpresaPagarCobrar.new("Cobra", 50))
             @mazo.alMazo(SorpresaPorJugador.new("Paga_jugador", -10))
             @mazo.alMazo(SorpresaPorJugador.new("Cobra_jugador", 10))
-            @mazo.alMazo(SorpresaPorJugador.new("Obras", -20))
-            @mazo.alMazo(SorpresaPorJugador.new("Casahotel", 25))
+            @mazo.alMazo(SorpresaPorCasaHotel.new("Obras", -20))
+            @mazo.alMazo(SorpresaPorCasaHotel.new("Casahotel", 25))
         end
 
         def contabilizarPasosPorSalida(jugadorActual)
