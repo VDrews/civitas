@@ -24,7 +24,6 @@ module Civitas
         end
         attr_reader :salvoconducto, :propiedades, :nombre, :numCasillaActual, :puedeComprar, :saldo, :encarcelado
         
-        #protected
         def copia(otro)
             @salvoconducto=otro.salvoconducto
             @propiedades=otro.propiedades
