@@ -11,6 +11,7 @@ require_relative('sorpresa_ircasilla')
 require_relative('sorpresa_pagarcobrar')
 require_relative('sorpresa_porjugador')
 require_relative('sorpresa_porcasahotel')
+require_relative('sorpresa_jugadorespeculador')
 
 module Civitas
     class CivitasJuego
@@ -73,6 +74,7 @@ module Civitas
         end
         
         def inicializaMazoSorpresas(tablero)
+            @mazo.alMazo(SorpresaJugadorEspeculador.new(200))
             @mazo.alMazo(SorpresaIrCarcel.new(@tablero))
             @mazo.alMazo(SorpresaSalirCarcel.new(@mazo))
             @mazo.alMazo(SorpresaIrCasilla.new("A la casilla", @tablero, 3))

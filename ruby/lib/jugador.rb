@@ -4,13 +4,13 @@ require_relative('titulo_propiedad')
 module Civitas
     class Jugador
         
-        @@CasasMax=4
+        @CasasMax=4
         @@CasasPorHotel=4
-        @@HotelesMax=4
+        @HotelesMax=4
         @@PasoPorSalida=1000
         @@PrecioLibertad=200
-        
         @@SaldoInicial=7500
+    
         
         def initialize(nombre)
             @salvoconducto=nil
@@ -22,13 +22,20 @@ module Civitas
             @encarcelado=false
             #Encarcelado es protected       
         end
-        
-        def copia(otro)
-            otro=self.dup
-        end
-
         attr_reader :salvoconducto, :propiedades, :nombre, :numCasillaActual, :puedeComprar, :saldo, :encarcelado
         
+        #protected
+        def copia(otro)
+            @salvoconducto=otro.salvoconducto
+            @propiedades=otro.propiedades
+            @nombre=otro.nombre
+            @numCasillaActual=otro.numCasillaActual
+            @puedeComprar=otro.puedeComprar
+            @encarcelado=otro.encarcelado
+            @saldo=otro.saldo
+        end
+
+        public
         def cancelarHipoteca(ip)
             result = false
 
@@ -128,7 +135,6 @@ module Civitas
             return @saldo <= 0
         end
 
-        public
         def encarcelar(numCasillaCarcel)
             if debeSerEncarcelado
                 moverACasilla(numCasillaCarcel)
@@ -161,7 +167,6 @@ module Civitas
             end
         end
 
-        public
         def obtenerSalvoconducto(sorpresa)
             if @encarcelado
                 return false            
@@ -210,21 +215,21 @@ module Civitas
             return false    
         end
 
-        #protected
         private
-
         def existeLaPropiedad(ip)
             return ip >= 0 && ip < @propiedades.length
         end
 
+        protected
         def self.CasasMax
-            return @@CasasMax
+            return @CasasMax
         end
 
         def self.HotelesMax
-            return @@HotelesMax
+            return @HotelesMax
         end
 
+        private
         def self.PrecioLibertad
             return @@PrecioLibertad
         end
@@ -245,7 +250,7 @@ module Civitas
         def puedoEdificarCasa(propiedad)
             precio=propiedad.precioEdificar
             if(puedoGastar(precio))
-                if(propiedad.numCasas<@@CasasMax)
+                if(propiedad.numCasas<Jugador.CasasMax)
                     return true
                 end
             end
@@ -255,7 +260,7 @@ module Civitas
         def puedoEdificarHotel(propiedad)
             precio=propiedad.precioEdificar
             if(puedoGastar(precio))
-                if(propiedad.numHoteles<@@HotelesMax)
+                if(propiedad.numHoteles<Jugador.HotelesMax)
                     if (propiedad.numCasas>=@@CasasPorHotel)
                         return true
                     end
