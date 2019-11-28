@@ -11,16 +11,24 @@ public class CasillaCalle extends Casilla {
         importe = titulo.getPrecioCompra();
     }
 
-    public void recibeJugador(int actual, ArrayList<Jugador> todos) {
-        Jugador jugador = todos.get(actual);
-        if (!tituloPropiedad.tienePropietario()) {
-            jugador.puedeComprarCasilla();
-        } else {
-            tituloPropiedad.tramitarAlquiler(jugador);
-        }
+    public float getImporte(){
+        return importe;
     }
 
-    TituloPropiedad getTituloPropiedad() {
+    public TituloPropiedad getTituloPropiedad(){
         return tituloPropiedad;
+    }
+
+    @Override
+    public void recibeJugador(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)){
+            informe(actual, todos);
+            Jugador jugador = todos.get(actual);
+            if (!tituloPropiedad.tienePropietario()) {
+                jugador.puedeComprarCasilla();
+            } else {
+                tituloPropiedad.tramitarAlquiler(jugador);
+            }
+        }
     }
 }

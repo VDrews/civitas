@@ -16,7 +16,7 @@ public class Casilla {
         return nombre;
     }
 
-    private void informe(int actual, ArrayList<Jugador> todos) {
+    public void informe(int actual, ArrayList<Jugador> todos) {
         if (jugadorCorrecto(actual, todos)) {
             Diario.getInstance().ocurreEvento(todos.get(actual).getNombre() + ": Casilla " + toString());
         }
@@ -30,7 +30,6 @@ public class Casilla {
         return "Casilla: " + nombre;
     }
 
-    public void recibeJugador(int actual, ArrayList<Jugador> todos) {
-        informe(actual, todos);
-    }
+    public void recibeJugador(int actual, ArrayList<Jugador> todos){}
+
 }

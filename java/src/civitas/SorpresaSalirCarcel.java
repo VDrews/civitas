@@ -9,16 +9,19 @@ public class SorpresaSalirCarcel extends Sorpresa {
         this.mazo = mazo;
     }
 
-    public void aplicarAJugador_salirCarcel(int actual, ArrayList<Jugador> todos) {
-        boolean alguienTieneSalvoConducto = false;
-        for (int i = 0; i < todos.size() && !alguienTieneSalvoConducto; i++) {
-            if (todos.get(i).tieneSalvoconducto()) {
-                alguienTieneSalvoConducto = true;
-            }
+    public void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)){
+            informe(actual,todos);
+            boolean alguienTieneSalvoConducto = false;
+            for (int i = 0; i < todos.size() && !alguienTieneSalvoConducto; i++) {
+                if (todos.get(i).tieneSalvoconducto()) {
+                    alguienTieneSalvoConducto = true;
+                }
 
-            if (!alguienTieneSalvoConducto) {
-                todos.get(actual).obtenerSalvoconducto(this);
-                salirDelMazo();
+                if (!alguienTieneSalvoConducto) {
+                    todos.get(actual).obtenerSalvoconducto(this);
+                    salirDelMazo();
+                }
             }
         }
     }

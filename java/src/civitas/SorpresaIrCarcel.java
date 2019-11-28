@@ -1,12 +1,18 @@
 package civitas;
 
+import java.util.ArrayList;
+
 public class SorpresaIrCarcel extends Sorpresa {
-    SorpresaIrCarcel(int valor, String texto) {
-        super(texto);
-        this.valor = valor;
+    private Tablero tablero;
+    SorpresaIrCarcel(Tablero tablero) {
+        super("Carcel");
+        this.tablero=tablero;
     }
 
-    private void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
-        todos.get(actual).encarcelar(valor);
+    public void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)){
+            informe(actual,todos);
+            todos.get(actual).encarcelar(tablero.getCarcel());
+        }
     }
 }

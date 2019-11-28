@@ -1,7 +1,7 @@
 package civitas;
 import java.util.ArrayList;
 
-public class Sorpresa {
+public abstract class Sorpresa {
     protected String texto;
 
     Sorpresa(String texto) {
@@ -12,7 +12,9 @@ public class Sorpresa {
         return (actual >= 0 && actual < todos.size());
     }
 
-    private void informe(int actual, ArrayList<Jugador> todos) {
+    public abstract void aplicarAJugador(int actual, ArrayList<Jugador> todos);
+
+    void informe(int actual, ArrayList<Jugador> todos) {
         Diario.getInstance().ocurreEvento("Se está aplicando una sorpresa a: " + todos.get(actual).getNombre());
     }
 }

@@ -62,17 +62,17 @@ public class CivitasJuego {
 
     private void inicializaMazoSopresas(Tablero tablero) {
 
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCARCEL, tablero));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.SALIRCARCEL, mazo));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, tablero, 3, "Ir a casilla"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, tablero, 6, "Ir a casilla"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.IRCASILLA, tablero, 10, "Ir a casilla"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, tablero, 50, "Pagar cobrar"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PAGARCOBRAR, tablero, -70, "Pagar cobrar"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, tablero, 10, "Jugador"));  
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORJUGADOR, tablero, -10, "Jugador"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, tablero, 25, "Casa o hotel"));
-        mazo.alMazo(new Sorpresa(TipoSorpresa.PORCASAHOTEL, tablero, -20, "Casa o hotel"));
+        mazo.alMazo(new SorpresaJugadorEspeculador(200));
+        mazo.alMazo(new SorpresaIrCarcel(tablero));
+        mazo.alMazo(new SorpresaSalirCarcel(mazo));
+        mazo.alMazo(new SorpresaIrCasilla("A la casilla", tablero, 3));
+        mazo.alMazo(new SorpresaIrCasilla("A la casilla", tablero, 6));
+        mazo.alMazo(new SorpresaPagarCobrar("Paga", -70));
+        mazo.alMazo(new SorpresaPagarCobrar("Cobra", 50));
+        mazo.alMazo(new SorpresaPorJugador("Paga_jugador", -10));
+        mazo.alMazo(new SorpresaPorJugador("Cobra_jugador", 10));
+        mazo.alMazo(new SorpresaPorCasaHotel("Obras", -20));
+        mazo.alMazo(new SorpresaPorCasaHotel("Casahotel", 25));
     }
 
     private void contabilizarPasosPorSalida(Jugador jugadorActual) {

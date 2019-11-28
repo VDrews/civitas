@@ -1,13 +1,18 @@
 package civitas;
 
+import java.util.ArrayList;
+
 public class SorpresaPagarCobrar extends Sorpresa {
     private int valor;
 
-    SorpresaPagarCobrar(int valor, String texto) {
+    SorpresaPagarCobrar(String texto, int valor) {
         super(texto);
         this.valor = valor;
     }
     public void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
-        todos.get(actual).modificarSaldo(valor);
+        if (jugadorCorrecto(actual, todos)){
+            informe(actual,todos);
+            todos.get(actual).modificarSaldo(valor);
+        }
     }
 }

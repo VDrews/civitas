@@ -9,7 +9,11 @@ public class CasillaImpuesto extends Casilla {
         importe = cantidad;
     }
 
+    @Override
     public void recibeJugador(int actual, ArrayList<Jugador> todos) {
-        todos.get(actual).pagaImpuesto(importe);
+        if (jugadorCorrecto(actual, todos)){
+            informe(actual, todos);
+            todos.get(actual).pagaImpuesto(importe);
+        }
     }
 }

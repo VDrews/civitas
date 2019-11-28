@@ -340,11 +340,11 @@ public class Jugador implements Comparable<Jugador> {
         return ip >= 0 && ip < propiedades.size();
     }
 
-    private int getCasasMax() {
+    protected int getCasasMax() {
         return CasasMax;
     }
 
-    private int getHotelesMax() {
+    protected int getHotelesMax() {
         return HotelesMax;
     }
 

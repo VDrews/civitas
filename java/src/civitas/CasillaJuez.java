@@ -8,7 +8,11 @@ public class CasillaJuez extends Casilla {
         carcel = numCasillaCarcel;
     }
 
+    @Override
     public void recibeJugador(int actual, ArrayList<Jugador> todos) {
-        todos.get(actual).encarcelar(carcel);
+        if (jugadorCorrecto(actual, todos)){
+            informe(actual, todos);
+            todos.get(actual).encarcelar(carcel);
+        }
     }
 }

@@ -1,5 +1,4 @@
 package civitas;
-import java.util.ArrayList;
 
 public class JugadorEspeculador extends Jugador {
     private static int factorEspeculador;
@@ -15,17 +14,17 @@ public class JugadorEspeculador extends Jugador {
         }
     }
 
-    @override
+    @Override
     protected int getCasasMax() {
         return CasasMax * factorEspeculador;
     }
 
-    @override
+    @Override
     protected int getHotelesMax() {
         return HotelesMax * factorEspeculador;
     }
 
-    @override
+    @Override
     protected boolean debeSerEncarcelado() {
         if (encarcelado) {
             return false;
@@ -46,14 +45,14 @@ public class JugadorEspeculador extends Jugador {
         }
     }
 
-    @override
+    @Override
     boolean pagaImpuesto(float cantidad) {
         if (encarcelado)
             return false;
         return paga(cantidad / 2);
     }
 
-    @override
+    @Override
     public String toString() {
         String props = "";
         for (int i = 0; i < propiedades.size(); i++) {

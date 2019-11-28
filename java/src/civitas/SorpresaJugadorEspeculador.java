@@ -1,17 +1,21 @@
 package civitas;
 
-public class SorpresaJugadorEspeculador extends Sorpresa {
-    int fianza;
-    Jugador jugador;
+import java.util.ArrayList;
 
-    SorpresaJugadorEspeculador(Jugador jugador, int fianza) {
-        super("Sorpresa Jugador Especulador");
+public class SorpresaJugadorEspeculador extends Sorpresa {
+    private int fianza;
+
+    SorpresaJugadorEspeculador(int fianza) {
+        super("Jugador Especulador");
         this.fianza = fianza;
-        this.jugador = jugador;
     }
 
-    public void aplicarAJugador_salirCarcel(int actual, ArrayList<Jugador> todos) {
-        jugador = new JugadorEspeculador(todos.get(actual), fianza);
-        
+    public void aplicarAJugador(int actual, ArrayList<Jugador> todos) {
+        if (jugadorCorrecto(actual, todos)){
+            informe(actual, todos);
+            JugadorEspeculador jugador=new JugadorEspeculador(todos.get(actual), fianza);
+            todos.remove(actual);
+            todos.add(actual, jugador);
+        }
     }
 }

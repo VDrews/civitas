@@ -9,8 +9,12 @@ public class CasillaSorpresa extends Casilla {
         this.mazo = mazo;
     }
 
+    @Override
     public void recibeJugador(int actual, ArrayList<Jugador> todos) {
-        sorpresa = mazo.siguiente();
-        sorpresa.aplicarAJugador(actual, todos);
+        if (jugadorCorrecto(actual, todos)){
+            informe(actual, todos);
+            sorpresa = mazo.siguiente();
+            sorpresa.aplicarAJugador(actual, todos);
+        }
     }
 }
