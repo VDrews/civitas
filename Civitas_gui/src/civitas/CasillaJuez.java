@@ -7,6 +7,11 @@ public class CasillaJuez extends Casilla {
         super(nombre);
         carcel = numCasillaCarcel;
     }
+    
+    @Override
+    public String getTipo(){
+        return "Juez";
+    }
 
     @Override
     public void recibeJugador(int actual, ArrayList<Jugador> todos) {

@@ -150,11 +150,11 @@ public class TituloPropiedad {
         return propietario;
     }
 
-    int getNumCasas() {
+    public int getNumCasas() {
         return numCasas;
     }
 
-    String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
@@ -162,7 +162,7 @@ public class TituloPropiedad {
         return hipotecado;
     }
 
-    int getNumHoteles() {
+    public int getNumHoteles() {
         return numHoteles;
     }
 
@@ -172,6 +172,10 @@ public class TituloPropiedad {
 
     float getPrecioEdificar() {
         return precioEdificar;
+    }
+    
+    public float getAlquilerBase(){
+        return alquilerBase;
     }
 
     boolean vender(Jugador jugador) {

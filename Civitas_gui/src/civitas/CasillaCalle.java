@@ -10,13 +10,19 @@ public class CasillaCalle extends Casilla {
         tituloPropiedad = titulo;
         importe = titulo.getPrecioCompra();
     }
-
+    
+    @Override
     public float getImporte(){
         return importe;
     }
 
     public TituloPropiedad getTituloPropiedad(){
         return tituloPropiedad;
+    }
+    
+    @Override
+    public String getTipo(){
+        return "Calle";
     }
 
     @Override

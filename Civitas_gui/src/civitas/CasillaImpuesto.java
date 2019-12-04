@@ -8,6 +8,16 @@ public class CasillaImpuesto extends Casilla {
         super(nombre);
         importe = cantidad;
     }
+    
+    @Override
+    public String getTipo(){
+        return "Impuesto";
+    }
+    
+    @Override
+    public float getImporte(){
+        return importe;
+    }
 
     @Override
     public void recibeJugador(int actual, ArrayList<Jugador> todos) {

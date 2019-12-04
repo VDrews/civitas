@@ -206,7 +206,7 @@ public class Jugador implements Comparable<Jugador> {
         return s;
     }
 
-    protected String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
@@ -222,7 +222,7 @@ public class Jugador implements Comparable<Jugador> {
         return puedeComprar;
     }
 
-    protected float getSaldo() {
+    public float getSaldo() {
         return saldo;
     }
 
@@ -260,7 +260,7 @@ public class Jugador implements Comparable<Jugador> {
         return pasoPorSalida;
     }
 
-    protected ArrayList<TituloPropiedad> getPropiedades() {
+    public ArrayList<TituloPropiedad> getPropiedades() {
         return propiedades;
     }
 
@@ -372,6 +372,10 @@ public class Jugador implements Comparable<Jugador> {
                 }
             }
         }
+        return false;
+    }
+    
+    public boolean isEspeculador(){
         return false;
     }
 

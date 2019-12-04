@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/chemooon/Escritorio/Civitas_gui/src/GUI/JugadorPanel.java</file>
-            <file>file:/home/chemooon/Escritorio/Civitas_gui/src/GUI/Controlador.java</file>
-            <file>file:/home/chemooon/Escritorio/Civitas_gui/src/GUI/TestP5.java</file>
-            <file>file:/home/chemooon/Escritorio/Civitas_gui/src/GUI/Dado.java</file>
-            <file>file:/home/chemooon/Escritorio/Civitas_gui/src/GUI/CivitasView.java</file>
-            <file>file:/home/chemooon/Escritorio/Civitas_gui/src/civitas/CivitasJuego.java</file>
+            <file>file:/home/chemooon/Escritorio/civitas/Civitas_gui/src/GUI/PropiedadPanel.java</file>
+            <file>file:/home/chemooon/Escritorio/civitas/Civitas_gui/src/GUI/CivitasView.java</file>
+            <file>file:/home/chemooon/Escritorio/civitas/Civitas_gui/src/GUI/JugadorPanel.java</file>
         </group>
     </open-files>
 </project-private>

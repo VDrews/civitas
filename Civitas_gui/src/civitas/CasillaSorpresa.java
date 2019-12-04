@@ -8,6 +8,11 @@ public class CasillaSorpresa extends Casilla {
         super(nombre);
         this.mazo = mazo;
     }
+    
+    @Override
+    public String getTipo(){
+        return "Sorpresa";
+    }
 
     @Override
     public void recibeJugador(int actual, ArrayList<Jugador> todos) {

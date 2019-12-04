@@ -29,6 +29,14 @@ public class Casilla {
     public String toString() {
         return "Casilla: " + nombre;
     }
+    
+    public String getTipo(){
+        return "Descanso";
+    }
+    
+    public float getImporte(){
+        return 0;
+    }
 
     public void recibeJugador(int actual, ArrayList<Jugador> todos){}
 

@@ -62,6 +62,11 @@ public class JugadorEspeculador extends Jugador {
                 + numCasillaActual;
         return s;
     }
+    
+    @Override
+    public boolean isEspeculador(){
+        return true;
+    }
 
 
 }
