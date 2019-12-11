@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import civitas.Diario;
+
 /**
  *
  * @author chemooon
@@ -17,6 +19,19 @@ public class DiarioDialog extends javax.swing.JDialog {
     public DiarioDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
+    }
+    
+    private Diario diario;
+    
+    private void mostrarEventos(){
+        while (diario.eventosPendientes()){
+            textarea_eventos.setText(diario.leerEvento());
+            repaint();
+            revalidate();
+            this.setVisible(true);
+            
+        }
     }
 
     /**
@@ -36,12 +51,16 @@ public class DiarioDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         label_eventos.setText("Eventos");
+        label_eventos.setEnabled(false);
+
+        jScrollPane1.setEnabled(false);
 
         textarea_eventos.setColumns(20);
         textarea_eventos.setRows(5);
         jScrollPane1.setViewportView(textarea_eventos);
 
         button_OK.setText("OK");
+        button_OK.setEnabled(false);
         button_OK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_OKActionPerformed(evt);
@@ -83,18 +102,19 @@ public class DiarioDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_OKActionPerformed
-        // TODO add your handling code here:
+       this.dispose();
     }//GEN-LAST:event_button_OKActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    /****
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         *//*
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -113,7 +133,7 @@ public class DiarioDialog extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /* Create and display the dialog *//*
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 DiarioDialog dialog = new DiarioDialog(new javax.swing.JFrame(), true);
@@ -126,7 +146,7 @@ public class DiarioDialog extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton button_OK;

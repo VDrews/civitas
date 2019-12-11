@@ -15,11 +15,10 @@ public class Controlador {
         this.juego = juego;
         this.vista = vista;
     }
-    /*
+ 
     void juega() {
         vista.setCivitasJuego(juego);
         while (!juego.finalDelJuego()) {
-            vista.pausa();
             OperacionesJuego siguiente = juego.siguientePaso();
             vista.mostrarSiguienteOperacion(siguiente);
             if (siguiente != OperacionesJuego.PASAR_TURNO)
@@ -35,8 +34,9 @@ public class Controlador {
                         juego.comprar();
                     }
                     juego.siguientePasoCompleado(OperacionesJuego.COMPRAR);
+                    //System.exit(0);
                     break;
-
+                    /*
                 case GESTIONAR:
                     vista.gestionar();
                     OperacionInmobiliaria operacion = new OperacionInmobiliaria(
@@ -82,10 +82,12 @@ public class Controlador {
 
                 default:
                     break;
+                */
+                    
+                
                 }
-
                 vista.actualizarVista();
             }
         }
-    }*/
+    }
 }

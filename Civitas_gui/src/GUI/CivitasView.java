@@ -7,6 +7,8 @@ package GUI;
 
 import civitas.CivitasJuego;
 import civitas.OperacionesJuego;
+import civitas.Respuestas;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +21,7 @@ public class CivitasView extends javax.swing.JFrame {
      */
     private JugadorPanel jugadorPanel;
     private CasillaPanel casillaPanel;
+    private GestionarDialog gestionarD;
     
     public CivitasView() {
         initComponents();
@@ -26,9 +29,15 @@ public class CivitasView extends javax.swing.JFrame {
         casillaPanel=new CasillaPanel();
         contenedorVistaCasilla.add(casillaPanel);
         contenedorVistaJugador.add(jugadorPanel);
+        repaint();
+        revalidate();
     }
     
-    private void actualizarVista(){
+    public int getGestion(){return gestionarD.getGestion();}
+    public int getPropiedad(){return gestionarD.getPropiedad();}
+    
+    void actualizarVista(){
+        mostrarEventos();
         jugadorPanel.setJugador(juego.getJugadorActual());
         casillaPanel.setCasilla(juego.getCasillaActual());
         label_ranking.setVisible(false);
@@ -53,6 +62,15 @@ public class CivitasView extends javax.swing.JFrame {
     public void mostrarSiguienteOperacion(OperacionesJuego operacion){
         text_siguienteoperacion.setText(operacion.toString());
         actualizarVista();
+    }
+    
+    public void mostrarEventos(){
+        DiarioDialog diarioD=new DiarioDialog(this, true);
+    }
+    
+    public Respuestas comprar(){
+        int opcion=JOptionPane.showConfirmDialog(null, "¿Quieres comprar la calle actual?", "Compra", JOptionPane.YES_NO_OPTION);
+        return Respuestas.values()[opcion];
     }
 
     /**
