@@ -51,26 +51,37 @@ public class PropiedadPanel extends javax.swing.JPanel {
         text_hipotecada = new javax.swing.JTextField();
 
         titulo.setText("TÍTULO DE PROPIEDAD");
+        titulo.setEnabled(false);
 
         label_nombre.setText("Nombre");
+        label_nombre.setEnabled(false);
 
         text_nombre.setText("jTextField1");
+        text_nombre.setEnabled(false);
 
         label_alqbase.setText("Alquiler base");
+        label_alqbase.setEnabled(false);
 
         text_alqbase.setText("jTextField2");
+        text_alqbase.setEnabled(false);
 
         label_numCasas.setText("Nr. de casas");
+        label_numCasas.setEnabled(false);
 
         text_numCasas.setText("jTextField3");
+        text_numCasas.setEnabled(false);
 
         label_numHoteles.setText("Nr. de hoteles");
+        label_numHoteles.setEnabled(false);
 
         label_hipotecada.setText("¿Hipotecada?");
+        label_hipotecada.setEnabled(false);
 
         text_numHoteles.setText("jTextField3");
+        text_numHoteles.setEnabled(false);
 
         text_hipotecada.setText("jTextField5");
+        text_hipotecada.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

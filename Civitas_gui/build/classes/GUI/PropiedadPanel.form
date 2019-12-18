@@ -93,56 +93,67 @@
     <Component class="javax.swing.JLabel" name="titulo">
       <Properties>
         <Property name="text" type="java.lang.String" value="T&#xcd;TULO DE PROPIEDAD"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_nombre">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nombre"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="text_nombre">
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_alqbase">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alquiler base"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="text_alqbase">
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField2"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_numCasas">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nr. de casas"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="text_numCasas">
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_numHoteles">
       <Properties>
         <Property name="text" type="java.lang.String" value="Nr. de hoteles"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="label_hipotecada">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#xbf;Hipotecada?"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="text_numHoteles">
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField3"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="text_hipotecada">
       <Properties>
         <Property name="text" type="java.lang.String" value="jTextField5"/>
+        <Property name="enabled" type="boolean" value="false"/>
       </Properties>
     </Component>
   </SubComponents>
