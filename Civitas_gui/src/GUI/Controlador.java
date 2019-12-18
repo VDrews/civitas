@@ -25,7 +25,7 @@ public class Controlador {
                 vista.mostrarEventos();
 
             if (juego.finalDelJuego())
-                juego.actualizarInfo();
+                vista.actualizarVista();
             else {
                 switch (siguiente) {
                 case COMPRAR:
@@ -36,9 +36,9 @@ public class Controlador {
                     juego.siguientePasoCompleado(OperacionesJuego.COMPRAR);
                     //System.exit(0);
                     break;
-                    /*
+                    
                 case GESTIONAR:
-                    vista.gestionar();
+                    vista.gestionar(juego.getJugadorActual());
                     OperacionInmobiliaria operacion = new OperacionInmobiliaria(
                             GestionesInmobiliarias.values()[vista.getGestion()], vista.getPropiedad());
                     int ip = operacion.getNumPropiedad();
@@ -82,7 +82,6 @@ public class Controlador {
 
                 default:
                     break;
-                */
                     
                 
                 }

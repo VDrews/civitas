@@ -24,8 +24,8 @@ public class GestionarDialog extends javax.swing.JDialog {
     /**
      * Creates new form GestionarDialog
      */
-    public GestionarDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public GestionarDialog(java.awt.Frame parent) {
+        super(parent, true);
         initComponents();
         gestionElegida=-1;
         propiedadElegida=-1;
@@ -50,7 +50,12 @@ public class GestionarDialog extends javax.swing.JDialog {
     }
     
     public void setPropiedades(Jugador jugador){
-        
+        DefaultListModel propiedades=new DefaultListModel<>();
+        ArrayList<String> opciones=jugador.getPropiedades_toString();
+        for (String s:opciones){
+            propiedades.addElement(s);
+        }
+        list_propiedades.setModel(propiedades);
     }
 
     /**
@@ -83,10 +88,15 @@ public class GestionarDialog extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         titulo.setText("GESTIONAR PROPIEDADES");
+        titulo.setEnabled(false);
 
         label_gestionar.setText("Gestionar");
+        label_gestionar.setEnabled(false);
 
         label_propiedades.setText("Propiedad");
+        label_propiedades.setEnabled(false);
+
+        jScrollPane3.setEnabled(false);
 
         list_propiedades.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -106,6 +116,8 @@ public class GestionarDialog extends javax.swing.JDialog {
                 realizarActionPerformed(evt);
             }
         });
+
+        jScrollPane4.setEnabled(false);
 
         list_gestionar.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -174,18 +186,20 @@ public class GestionarDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_list_propiedadesMouseClicked
 
     private void realizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_realizarActionPerformed
-        
+        gestionElegida=list_gestionar.getSelectedIndex();
+        propiedadElegida=list_propiedades.getSelectedIndex();
+        dispose();
     }//GEN-LAST:event_realizarActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+         *//*
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -205,7 +219,7 @@ public class GestionarDialog extends javax.swing.JDialog {
         //</editor-fold>
 
         /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
+       /* java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 GestionarDialog dialog = new GestionarDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -217,7 +231,7 @@ public class GestionarDialog extends javax.swing.JDialog {
                 dialog.setVisible(true);
             }
         });
-    }
+    }*/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> jList2;

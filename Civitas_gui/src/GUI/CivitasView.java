@@ -6,8 +6,10 @@
 package GUI;
 
 import civitas.CivitasJuego;
+import civitas.Jugador;
 import civitas.OperacionesJuego;
 import civitas.Respuestas;
+import civitas.SalidasCarcel;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,8 +47,7 @@ public class CivitasView extends javax.swing.JFrame {
         if (juego.finalDelJuego()){
             label_ranking.setVisible(true);
             textarea_ranking.setVisible(true);
-            //textarea_ranking.setText(juego.);
-            //Crear en CivitasJuego un toString para esto
+            textarea_ranking.setText(juego.ranking_toString());
         }
         repaint();
         revalidate();       
@@ -65,12 +66,27 @@ public class CivitasView extends javax.swing.JFrame {
     }
     
     public void mostrarEventos(){
-        DiarioDialog diarioD=new DiarioDialog(this, true);
+        DiarioDialog diarioD=new DiarioDialog(this);
     }
     
     public Respuestas comprar(){
         int opcion=JOptionPane.showConfirmDialog(null, "¿Quieres comprar la calle actual?", "Compra", JOptionPane.YES_NO_OPTION);
         return Respuestas.values()[opcion];
+    }
+    
+    public SalidasCarcel salirCarcel(){
+        String[] opciones={"Pagando", "Tirando"};
+        int opcion=JOptionPane.showOptionDialog(null, "¿Cómo quieres salir de la cárcel?", "Salir de la cárcel", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+        return SalidasCarcel.values()[opcion];
+    }
+    
+    public void gestionar(Jugador jugadorActual){
+        gestionarD=new GestionarDialog(this);
+        gestionarD.gestionar(jugadorActual);
+        gestionarD.pack();
+        gestionarD.repaint();
+        gestionarD.revalidate();
+        gestionarD.setVisible(true);
     }
 
     /**

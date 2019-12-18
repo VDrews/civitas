@@ -153,6 +153,19 @@ public class CivitasJuego {
 
         return jugadores_ordenados;
     }
+    
+    public String ranking_toString(){
+        ArrayList<Jugador> rank=ranking();
+        String ret="";
+        for (int i=0; i<rank.size(); i++){
+            ret+=String.valueOf(i+1);
+            ret+=rank.get(i).getNombre();
+            ret+="\n";
+        }
+        return ret;
+    }
+    
+    
 
     private void avanzaJugador() {
         Jugador jugadorActual = jugadores.get(indiceJugadorActual);

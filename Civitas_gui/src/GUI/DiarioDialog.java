@@ -16,17 +16,16 @@ public class DiarioDialog extends javax.swing.JDialog {
     /**
      * Creates new form DiarioDialog
      */
-    public DiarioDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public DiarioDialog(java.awt.Frame parent) {
+        super(parent, true);
         initComponents();
         setLocationRelativeTo(null);
+        mostrarEventos();
     }
     
-    private Diario diario;
-    
     private void mostrarEventos(){
-        while (diario.eventosPendientes()){
-            textarea_eventos.setText(diario.leerEvento());
+        while (Diario.getInstance().eventosPendientes()){
+            textarea_eventos.setText(Diario.getInstance().leerEvento());
             repaint();
             revalidate();
             this.setVisible(true);
@@ -60,7 +59,6 @@ public class DiarioDialog extends javax.swing.JDialog {
         jScrollPane1.setViewportView(textarea_eventos);
 
         button_OK.setText("OK");
-        button_OK.setEnabled(false);
         button_OK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 button_OKActionPerformed(evt);
